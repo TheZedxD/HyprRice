@@ -1,90 +1,39 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 24,
-  "modules-left":  [ "hyprland/workspaces", "clock" ],
-  "modules-right": [ "tray", "pulseaudio", "network", "bluetooth", "battery" ],
-
   "tray": {
-    "icon-size": 18,
-    "spacing":   6
+    "icon-size": 16,
+    "spacing": 10
   },
-
+  "modules-left": ["workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["pulseaudio", "network", "cpu", "memory", "tray"],
   "clock": {
-    "format": "Time: {:%H:%M}",
+    "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
-    "tooltip-format": "{:%A, %B %d %Y\\n%H:%M:%S}"
+    "on-click": "alacritty -e cal"
   },
-
   "pulseaudio": {
-    "format": "Vol: {icon} {volume}%",
-    "format-muted": "Vol: [muted] 0%",
     "tooltip": true,
-    "tooltip-format": "{desc}\\nVolume: {volume}%\\nMuted: {muted}",
-    "format-icons": {
-      "default": [
-        "[----------]",
-        "[#---------]",
-        "[##--------]",
-        "[###-------]",
-        "[####------]",
-        "[#####-----]",
-        "[######----]",
-        "[#######---]",
-        "[########--]",
-        "[#########-]",
-        "[##########]"
-      ]
-    }
+    "format": "{volume}% ",
+    "on-click": "pavucontrol"
   },
-
   "network": {
-    "format-wifi": "Net: {icon} {signalStrength}% {essid}",
-    "format-ethernet": "Net: {ifname} ",
-    "format-disconnected": "Net: down",
     "tooltip": true,
-    "tooltip-format": "{ifname}\\nIP: {ipaddr}\\nDown: {downspeed}\\nUp: {upspeed}",
-    "format-icons": [
-      "[----------]",
-      "[#---------]",
-      "[##--------]",
-      "[###-------]",
-      "[####------]",
-      "[#####-----]",
-      "[######----]",
-      "[#######---]",
-      "[########--]",
-      "[#########-]",
-      "[##########]"
-    ]
+    "format-wifi": "{signalStrength}% ",
+    "format-ethernet": "{ipaddr} ",
+    "on-click": "alacritty -e nmtui"
   },
-
-  "bluetooth": {
-    "format-on": "BT: on",
-    "format-off": "BT: off",
+  "cpu": {
     "tooltip": true,
-    "tooltip-format": "{status}"
+    "format": "{usage}% "
   },
-
-  "battery": {
-    "format": "Bat: {icon} {capacity}%",
-    "format-charging": "Bat: {icon} {capacity}% ⚡",
-    "format-full": "Bat: [##########] {capacity}%",
+  "memory": {
     "tooltip": true,
-    "tooltip-format": "{status}\\nCapacity: {capacity}%\\nTime: {time}",
-    "format-icons": [
-      "[----------]",
-      "[#---------]",
-      "[##--------]",
-      "[###-------]",
-      "[####------]",
-      "[#####-----]",
-      "[######----]",
-      "[#######---]",
-      "[########--]",
-      "[#########-]",
-      "[##########]"
-    ]
+    "format": "{used}G/{total}G "
+  },
+  "workspaces": {
+    "tooltip": true,
+    "format": "{icon}"
   }
 }
-

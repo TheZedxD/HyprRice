@@ -10,8 +10,8 @@ CONFIG_DEST="$TARGET_HOME/.config"
 
 printf 'Installing configuration for user %s in %s\n' "$TARGET_USER" "$CONFIG_DEST"
 
-# Check for common dependencies and warn if missing
-needed=(alacritty hyprland waybar wofi swaybg dolphin firefox)
+# Ensure required packages are installed
+needed=(alacritty hyprland waybar wofi swaybg dolphin firefox pavucontrol networkmanager)
 missing=()
 for cmd in "${needed[@]}"; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
@@ -19,7 +19,12 @@ for cmd in "${needed[@]}"; do
     fi
 done
 if ((${#missing[@]})); then
-    printf 'Warning: missing dependencies: %s\n' "${missing[*]}"
+    if command -v pacman >/dev/null 2>&1; then
+        printf 'Installing missing dependencies: %s\n' "${missing[*]}"
+        sudo pacman -S --needed --noconfirm "${missing[@]}"
+    else
+        printf 'Warning: missing dependencies: %s\n' "${missing[*]}"
+    fi
 fi
 
 DIRS=(alacritty hypr waybar wofi)
