@@ -14,6 +14,14 @@
    ```
    The script copies the configuration into `~/.config` for the current user.
 
+## Update
+
+After pulling the latest changes, run the updater to refresh your configuration:
+
+```bash
+./update.sh
+```
+
 ## About
 
 HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.com/hyprwm/Hyprland) Wayland compositor. It aims for a clean and minimal look with sharp edges and bright green accents.
