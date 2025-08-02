@@ -3,7 +3,9 @@
   background-color: #000000;
   color: #00ff00;
   font-family: monospace;
-  border: 2px solid #00ff00;
+  border: 1px solid #00ff00;
+  height: 24px;
+  font-size: 12px;
 }
 
 #waybar .module {

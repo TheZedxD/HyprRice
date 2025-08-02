@@ -35,8 +35,8 @@ progress $step $total
 mkdir -p "$CONFIG_DEST"
 for dir in "${DIRS[@]}"; do
     echo -e "\nSyncing $dir configuration..."
-    mkdir -p "$CONFIG_DEST/$dir"
-    cp -r ".config/$dir/." "$CONFIG_DEST/$dir/"
+    rm -rf "$CONFIG_DEST/$dir"
+    cp -r ".config/$dir" "$CONFIG_DEST/"
     step=$((step+1))
     progress $step $total
 done
