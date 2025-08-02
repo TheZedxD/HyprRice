@@ -8,7 +8,7 @@
   },
   "modules-left": ["workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
+  "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "battery", "tray"],
 
   "clock": {
     "format": "{:%Y-%m-%d %H:%M}",
@@ -37,13 +37,23 @@
   "cpu": {
     "format": " CPU {usage}%",
     "tooltip": true,
-    "tooltip-format": "CPU usage: {usage}%"
+    "tooltip-format": "CPU usage: {usage}%",
+    "on-click": "alacritty -e htop"
   },
 
   "memory": {
     "format": " MEM {used}G/{total}G",
     "tooltip": true,
-    "tooltip-format": "Memory used: {used}G / {total}G"
+    "tooltip-format": "Memory used: {used}G / {total}G",
+    "on-click": "alacritty -e htop"
+  },
+
+  "disk": {
+    "format": " DISK {percentage_used}%",
+    "path": "/",
+    "tooltip": true,
+    "tooltip-format": "{used} / {total} used",
+    "on-click": "alacritty -e ncdu /"
   },
 
   "battery": {
@@ -51,7 +61,8 @@
     "format-charging": " BAT {capacity}%",
     "format-full": " BAT full",
     "tooltip": true,
-    "tooltip-format": "Battery: {capacity}%"
+    "tooltip-format": "Battery: {capacity}%",
+    "on-click": "xfce4-power-manager-settings"
   },
 
   "workspaces": {
