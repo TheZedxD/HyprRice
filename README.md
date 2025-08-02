@@ -2,17 +2,13 @@
 
 ## Installation (Arch Linux)
 
-1. Install required packages:
-   ```bash
-   sudo pacman -S hyprland waybar wofi alacritty swaybg dolphin firefox
-   ```
-2. Clone this repository and run the installer:
+1. Clone this repository and run the installer:
    ```bash
    git clone https://github.com/<your_user>/HyprRice.git
    cd HyprRice
    ./install.sh
    ```
-   The script copies the configuration into `~/.config` for the current user.
+   The script installs required packages and copies the configuration into `~/.config` for the current user.
 
 ## Update
 
@@ -33,6 +29,7 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 - Animations disabled for snappy performance
 - Small inner gaps for tiling and no outer gaps
 - Waybar for system status and Wofi as application launcher
+- Waybar modules show tooltips and launch pavucontrol or NetworkManager when clicked
 - Autostarts Waybar and an Alacritty terminal
 - Solid black wallpaper via swaybg
 
@@ -45,7 +42,7 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 | **Super + Q** | Close focused window |
 | **Super + F** | Launch Dolphin file manager |
 | **Super + B** | Launch Firefox browser |
-| **Super + C** / **Super + V** | Toggle floating mode |
+| **Super + C** | Toggle floating mode |
 | **Super + V** | Center and widen window for easy moving |
 | **Super + Arrow Keys** | Move focus left/down/up/right |
 | **Super + Ctrl + Arrow Keys** | Move window to adjacent workspace |
@@ -53,4 +50,14 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 
 ## Notes
 
-Ensure required packages are installed before running the installer. Additional tools like a polkit agent or notification daemon may be needed for a full desktop experience.
+The install script attempts to install all required packages. Additional tools like a polkit agent or notification daemon may be needed for a full desktop experience.
+
+## Waybar Actions
+
+| Module | Click Action |
+|--------|--------------|
+| Clock | Open calendar in Alacritty |
+| Audio | Launch `pavucontrol` |
+| Network | Launch `nmtui` in Alacritty |
+
+All modules display tooltips on hover.

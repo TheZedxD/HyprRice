@@ -8,6 +8,23 @@ TARGET_HOME=$(eval echo "~$TARGET_USER")
 CONFIG_DEST="$TARGET_HOME/.config"
 DIRS=(alacritty hypr waybar wofi)
 
+# Ensure required packages are installed
+needed=(alacritty hyprland waybar wofi swaybg dolphin firefox pavucontrol networkmanager)
+missing=()
+for cmd in "${needed[@]}"; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        missing+=("$cmd")
+    fi
+done
+if ((${#missing[@]})); then
+    if command -v pacman >/dev/null 2>&1; then
+        printf 'Installing missing dependencies: %s\n' "${missing[*]}"
+        sudo pacman -S --needed --noconfirm "${missing[@]}"
+    else
+        printf 'Warning: missing dependencies: %s\n' "${missing[*]}"
+    fi
+fi
+
 progress() {
     local current=$1 total=$2 width=30
     local percent=$(( current * 100 / total ))

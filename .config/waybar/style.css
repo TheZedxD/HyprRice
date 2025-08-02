@@ -1,37 +1,17 @@
-/* Matrix-style Waybar CSS */
-#waybar {
-  background-color: #000000;
-  color: #00ff00;
+* {
   font-family: monospace;
-  border: 1px solid #00ff00;
-  height: 24px;
   font-size: 12px;
 }
 
-#waybar .module {
-  padding: 0 10px;
-  border: 1px solid #00ff00;
-  margin: 0 2px;
-}
-
-#waybar .module:hover {
-  background-color: #001900;
-  border-color: #00ff00;
-}
-
-#workspaces button {
-  border: 1px solid #00ff00;
-  padding: 0 5px;
-  margin: 2px;
+window#waybar {
+  background: #000000;
   color: #00ff00;
 }
 
-#workspaces button.active {
-  background-color: #00ff00;
-  color: #000000;
+#workspaces button.focused {
+  background: #005500;
 }
 
-#tray > * {
-  margin: 0 3px;
+#pulseaudio.muted {
+  color: #555555;
 }
-
