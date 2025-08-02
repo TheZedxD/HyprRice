@@ -8,39 +8,58 @@
   "modules-left": ["workspaces"],
   "modules-center": ["clock"],
   "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
+
   "clock": {
     "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
+    "tooltip-format": "{:%A, %B %d %Y}",
     "on-click": "alacritty -e cal"
   },
+
   "pulseaudio": {
+    "format": " VOL {volume}%",
+    "format-muted": " VOL {volume}%",
     "tooltip": true,
-    "format": "Audio: {volume}%",
+    "tooltip-format": "Volume: {volume}%",
     "on-click": "pavucontrol"
   },
+
   "network": {
+    "format-wifi": " NET {signalStrength}%",
+    "format-ethernet": " NET {ipaddr}",
+    "format-disconnected": " NET down",
     "tooltip": true,
-    "format-wifi": "Net: {signalStrength}%",
-    "format-ethernet": "Net: {ipaddr}",
-    "format-disconnected": "Net: down",
-    "on-click": "alacritty -e nmtui"
+    "tooltip-format": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
+    "on-click": "nm-connection-editor"
   },
+
   "cpu": {
+    "format": " CPU {usage}%",
     "tooltip": true,
-    "format": "CPU: {usage}%"
+    "tooltip-format": "CPU usage: {usage}%"
   },
+
   "memory": {
+    "format": " MEM {used}G/{total}G",
     "tooltip": true,
-    "format": "Mem: {used}G/{total}G"
+    "tooltip-format": "Memory used: {used}G / {total}G"
   },
+
   "battery": {
+    "format": " BAT {capacity}%",
+    "format-charging": " BAT {capacity}%",
+    "format-full": " BAT full",
     "tooltip": true,
-    "format": "Power: {capacity}%",
-    "format-charging": "Power: {capacity}%+",
-    "format-full": "Power: full"
+    "tooltip-format": "Battery: {capacity}%"
   },
+
   "workspaces": {
+    "format": "{id}",
+    "sort-by-number": true,
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "on-click": "hyprctl dispatch workspace {id}",
     "tooltip": true,
-    "format": "{name}"
+    "tooltip-format": "Workspace {id}: {windows} windows"
   }
 }
