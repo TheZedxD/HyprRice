@@ -2,15 +2,44 @@
   "layer": "top",
   "position": "top",
   "height": 24,
-  "modules-left":  [ "hyprland/workspaces", "tray", "clock" ],
-  "modules-right": [ "pulseaudio", "network", "bluetooth", "battery" ],
+  "modules-left":  [ "hyprland/workspaces", "clock" ],
+  "modules-right": [ "tray", "pulseaudio", "network", "bluetooth", "battery" ],
 
   "tray": {
     "icon-size": 18,
     "spacing":   6
   },
-  "pulseaudio": { "format": "{volume}%" },
-  "network":    { "format-wifi": "{essid} ", "format-ethernet": "{ifname} " },
-  "bluetooth":  { "format-on": "", "format-off": "" }
+
+  "clock": {
+    "format": "Time: {:%H:%M}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %B %d %Y\\n%H:%M:%S}"
+  },
+
+  "pulseaudio": {
+    "format": "Vol: {volume}% {icon}",
+    "format-muted": "Vol: muted",
+    "tooltip-format": "{desc}\\nVolume: {volume}%\\nMuted: {muted}"
+  },
+
+  "network": {
+    "format-wifi": "Net: {essid} ({signalStrength}%) ",
+    "format-ethernet": "Net: {ifname} ",
+    "format-disconnected": "Net: down",
+    "tooltip-format": "{ifname}\\nIP: {ipaddr}\\nDown: {downspeed}\\nUp: {upspeed}"
+  },
+
+  "bluetooth": {
+    "format-on": "BT: on",
+    "format-off": "BT: off",
+    "tooltip-format": "{status}"
+  },
+
+  "battery": {
+    "format": "Bat: {capacity}% {icon}",
+    "format-charging": "Bat: {capacity}% ⚡",
+    "format-full": "Bat: full",
+    "tooltip-format": "{status}\\nCapacity: {capacity}%\\nTime: {time}"
+  }
 }
 

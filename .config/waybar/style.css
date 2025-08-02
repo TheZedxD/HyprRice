@@ -10,10 +10,13 @@
 
 #waybar .module {
   padding: 0 10px;
+  border: 1px solid #00ff00;
+  margin: 0 2px;
 }
 
 #waybar .module:hover {
   background-color: #001900;
+  border-color: #00ff00;
 }
 
 #workspaces button {
