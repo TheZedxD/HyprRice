@@ -5,7 +5,7 @@ sudo pacman -S --needed \
   networkmanager network-manager-applet nm-connection-editor \
   polkit-gnome bluez bluez-utils blueman \
   pavucontrol helvum xfce4-power-manager udiskie \
-  nwg-displays waybar alacritty swaybg wofi firefox dolphin hyprland jq && \
+  nwg-displays waybar alacritty swaybg wofi firefox dolphin hyprland jq htop ncdu && \
 paru -S --needed hyprgui-git && \
 systemctl enable --now NetworkManager bluetooth && \
 hyprctl reload

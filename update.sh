@@ -9,7 +9,22 @@ CONFIG_DEST="$TARGET_HOME/.config"
 DIRS=(alacritty hypr waybar wofi)
 
 # Ensure required packages are installed
-needed=(alacritty hyprland waybar wofi swaybg dolphin firefox pavucontrol networkmanager jq)
+needed=(
+    alacritty
+    hyprland
+    waybar
+    wofi
+    swaybg
+    dolphin
+    firefox
+    pavucontrol
+    networkmanager
+    nm-connection-editor
+    xfce4-power-manager-settings
+    htop
+    ncdu
+    jq
+)
 missing=()
 for cmd in "${needed[@]}"; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
