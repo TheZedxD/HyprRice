@@ -9,7 +9,7 @@ CONFIG_DEST="$TARGET_HOME/.config"
 DIRS=(alacritty hypr waybar wofi)
 
 # Ensure required packages are installed
-needed=(
+packages=(
     alacritty
     hyprland
     waybar
@@ -19,25 +19,38 @@ needed=(
     firefox
     pavucontrol
     networkmanager
+    network-manager-applet
     nm-connection-editor
     xfce4-power-manager-settings
     htop
     ncdu
     jq
+    archlinux-xdg-menu
+    desktop-file-utils
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
+    polkit-gnome
 )
-missing=()
-for cmd in "${needed[@]}"; do
-    if ! command -v "$cmd" >/dev/null 2>&1; then
-        missing+=("$cmd")
-    fi
-done
-if ((${#missing[@]})); then
-    if command -v pacman >/dev/null 2>&1; then
+if command -v pacman >/dev/null 2>&1; then
+    missing=()
+    for pkg in "${packages[@]}"; do
+        pacman -Qi "$pkg" >/dev/null 2>&1 || missing+=("$pkg")
+    done
+    if ((${#missing[@]})); then
         printf 'Installing missing dependencies: %s\n' "${missing[*]}"
         sudo pacman -S --needed --noconfirm "${missing[@]}"
-    else
-        printf 'Warning: missing dependencies: %s\n' "${missing[*]}"
     fi
+else
+    printf 'Warning: pacman not found; cannot verify dependencies.\n'
+fi
+
+# Rebuild application menus and ensure portals/services are running
+if command -v kbuildsycoca6 >/dev/null 2>&1; then
+    sudo -u "$TARGET_USER" XDG_MENU_PREFIX=arch- kbuildsycoca6 || true
+fi
+if command -v systemctl >/dev/null 2>&1; then
+    sudo systemctl enable --now NetworkManager.service || true
+    sudo -u "$TARGET_USER" systemctl --user restart xdg-desktop-portal-hyprland.service || true
 fi
 
 progress() {
@@ -55,11 +68,13 @@ step=0
 echo "Updating HyprRice for ${TARGET_USER}"
 progress $step $total
 
-if git remote get-url origin >/dev/null 2>&1; then
-    echo -e "\nPulling latest changes..."
-    git pull --rebase --autostash
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo -e "\nFetching latest changes..."
+    current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)
+    git fetch origin "$current_branch"
+    git reset --hard "origin/$current_branch"
 else
-    echo -e "\nNo git remote configured; skipping pull."
+    echo -e "\nNot a git repository; skipping update."
 fi
 step=$((step+1))
 progress $step $total
