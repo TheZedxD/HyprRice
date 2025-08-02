@@ -11,7 +11,7 @@ CONFIG_DEST="$TARGET_HOME/.config"
 printf 'Installing configuration for user %s in %s\n' "$TARGET_USER" "$CONFIG_DEST"
 
 # Ensure required packages are installed
-needed=(
+packages=(
     alacritty
     hyprland
     waybar
@@ -21,25 +21,38 @@ needed=(
     firefox
     pavucontrol
     networkmanager
+    network-manager-applet
     nm-connection-editor
     xfce4-power-manager-settings
     htop
     ncdu
     jq
+    archlinux-xdg-menu
+    desktop-file-utils
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
+    polkit-gnome
 )
-missing=()
-for cmd in "${needed[@]}"; do
-    if ! command -v "$cmd" >/dev/null 2>&1; then
-        missing+=("$cmd")
-    fi
-done
-if ((${#missing[@]})); then
-    if command -v pacman >/dev/null 2>&1; then
+if command -v pacman >/dev/null 2>&1; then
+    missing=()
+    for pkg in "${packages[@]}"; do
+        pacman -Qi "$pkg" >/dev/null 2>&1 || missing+=("$pkg")
+    done
+    if ((${#missing[@]})); then
         printf 'Installing missing dependencies: %s\n' "${missing[*]}"
         sudo pacman -S --needed --noconfirm "${missing[@]}"
-    else
-        printf 'Warning: missing dependencies: %s\n' "${missing[*]}"
     fi
+else
+    printf 'Warning: pacman not found; cannot verify dependencies.\n'
+fi
+
+# Rebuild application menus and ensure portals/services are running
+if command -v kbuildsycoca6 >/dev/null 2>&1; then
+    sudo -u "$TARGET_USER" XDG_MENU_PREFIX=arch- kbuildsycoca6 || true
+fi
+if command -v systemctl >/dev/null 2>&1; then
+    sudo systemctl enable --now NetworkManager.service || true
+    sudo -u "$TARGET_USER" systemctl --user restart xdg-desktop-portal-hyprland.service || true
 fi
 
 DIRS=(alacritty hypr waybar wofi)
