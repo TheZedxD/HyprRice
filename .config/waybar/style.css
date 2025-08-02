@@ -1,0 +1,25 @@
+/* Waybar CSS for Matrix theme */
+#waybar {
+  background: #000000;
+  color: #27F546;
+  font-family: monospace;           /* Monospace font for terminal feel (uses system default monospace) */
+  border-bottom: 2px solid #27F546; /* a thin green line at bottom of bar (Tron-style outline) */
+}
+#waybar .module {
+  padding: 0 10px;
+}
+#waybar .modules-right > *:not(:last-child) {
+  margin-right: 20px; /* spacing between modules */
+}
+#waybar .module:hover {
+  color: #009417;     /* on hover, slightly darker green highlight */
+}
+/* Optional: style specific modules by ID if needed */
+#network, #cpu, #memory, #temperature, #clock {
+  font-weight: bold;
+}
+
+/* Hide unnecessary elements */
+#workspaces, #mode, #window, #launcher {
+  display: none;
+}

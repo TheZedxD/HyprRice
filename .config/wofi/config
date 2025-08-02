@@ -1,0 +1,10 @@
+# Wofi configuration (ini format)
+[settings]
+mode = drun,run              # show both desktop apps (drun) and command launcher (run)
+terminal = alacritty         # use Alacritty for launching terminal apps
+show_icons = false           # do not show icons (text only, for speed and minimalism)
+hide_scroll = true           # hide scrollbar (we'll scroll with keyboard if needed)
+case_insensitive = true      # case-insensitive search for convenience (insensitive)
+prompt =                     # no prompt text (clean look)
+width = 30%                  # width of Wofi window (30% of screen)
+height = 30%                 # height of Wofi window (30% of screen)
