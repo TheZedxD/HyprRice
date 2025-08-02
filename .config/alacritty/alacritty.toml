@@ -35,6 +35,8 @@ magenta = "0xFF55FF"
 cyan    = "0x55FFFF"
 white   = "0xFFFFFF"
 
+[font]
+size = 11.0
+
 [font.normal]
 family = "monospace"
-size = 11.0
