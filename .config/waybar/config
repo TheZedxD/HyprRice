@@ -7,7 +7,7 @@
   },
   "modules-left": ["workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "tray"],
+  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
   "clock": {
     "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
@@ -15,25 +15,32 @@
   },
   "pulseaudio": {
     "tooltip": true,
-    "format": "{volume}% ",
+    "format": "Audio: {volume}%",
     "on-click": "pavucontrol"
   },
   "network": {
     "tooltip": true,
-    "format-wifi": "{signalStrength}% ",
-    "format-ethernet": "{ipaddr} ",
+    "format-wifi": "Net: {signalStrength}%",
+    "format-ethernet": "Net: {ipaddr}",
+    "format-disconnected": "Net: down",
     "on-click": "alacritty -e nmtui"
   },
   "cpu": {
     "tooltip": true,
-    "format": "{usage}% "
+    "format": "CPU: {usage}%"
   },
   "memory": {
     "tooltip": true,
-    "format": "{used}G/{total}G "
+    "format": "Mem: {used}G/{total}G"
+  },
+  "battery": {
+    "tooltip": true,
+    "format": "Power: {capacity}%",
+    "format-charging": "Power: {capacity}%+",
+    "format-full": "Power: full"
   },
   "workspaces": {
     "tooltip": true,
-    "format": "{icon}"
+    "format": "{name}"
   }
 }

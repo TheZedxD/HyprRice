@@ -27,7 +27,7 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 - Neon green "Matrix" theme with solid active/inactive borders
 - Zero window rounding and no shadows for a crisp aesthetic
 - Animations disabled for snappy performance
-- Small inner gaps for tiling and no outer gaps
+- Small inner gaps for tiling and a minimal top gap for Waybar
 - Waybar for system status and Wofi as application launcher
 - Waybar modules show tooltips and launch pavucontrol or NetworkManager when clicked
 - Autostarts Waybar and an Alacritty terminal
@@ -42,8 +42,8 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 | **Super + Q** | Close focused window |
 | **Super + F** | Launch Dolphin file manager |
 | **Super + B** | Launch Firefox browser |
-| **Super + C** | Toggle floating mode |
-| **Super + V** | Center and widen window for easy moving |
+| **Super + C** | Toggle centered floating zoom |
+| **Super + V** | Center window |
 | **Super + Arrow Keys** | Move focus left/down/up/right |
 | **Super + Ctrl + Arrow Keys** | Move window to adjacent workspace |
 | **Super + [1-9]** | Switch to workspace 1-9 |
