@@ -1,6 +1,7 @@
 {
   "layer": "top",
   "position": "top",
+  "spacing": 5,
   "tray": {
     "icon-size": 16,
     "spacing": 10
