@@ -1,0 +1,25 @@
+/* Wofi CSS for Matrix theme */
+window {
+  background-color: #000000;
+  color: #27F546;
+  /* Center the Wofi window by letting Hyprland's rule handle positioning */
+}
+#input {
+  background-color: #000000;
+  color: #27F546;
+  border: 2px solid #27F546;
+  border-radius: 0;
+}
+#scroll {
+  background-color: #000000;
+  color: #27F546;
+  border: 2px solid #27F546;
+  border-top-width: 0;  /* merge input and list borders */
+}
+#entry {
+  color: #27F546;
+}
+#entry:selected {
+  background-color: #27F546;
+  color: #000000; /* highlighted selection: green background, black text */
+}

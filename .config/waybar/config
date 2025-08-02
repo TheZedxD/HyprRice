@@ -1,0 +1,46 @@
+{
+  // Waybar configuration for Matrix theme
+  "layer": "top",                // layer: top so it stays above windows
+  "position": "top",             // stick to top of screen
+  "height": 30,
+  "margin": 0,
+  "modules-left": [],            // no modules on left (clean look)
+  "modules-center": [],          // no modules in center
+  "modules-right": [ "network", "cpu", "memory", "temperature", "clock" ],
+  // Format and behavior of each module:
+  "network": {
+    "interface": "wl*",                          // use first wireless interface (Wi-Fi)
+    "format": "WIFI: {essid} ({signalStrength}%)", // Wi-Fi name and signal percent
+    "format-disconnected": "WIFI: disconnected",
+    "interval": 10
+  },
+  "cpu": {
+    "format": "CPU {usage}%",                   // CPU usage percentage
+    "interval": 3                               // update more frequently (3s)
+  },
+  "memory": {
+    "format": "RAM {percentage}%",              // RAM usage percentage
+    "interval": 5
+  },
+  "temperature": {
+    "thermal-zone": 0,                         // use thermal zone 0 (CPU)
+    "format": "TEMP {temperatureC}°C",
+    "interval": 5
+  },
+  "clock": {
+    "format": "{:%Y-%m-%d %H:%M}",             // Date and 24h time (YYYY-MM-DD HH:MM)
+    "interval": 60,
+    "tooltip": false
+  },
+  // You can add more modules here (e.g., "battery", "volume") if needed:
+  /*
+  "battery": {
+    "format": "BAT {capacity}%",
+    "hide-full": true
+  },
+  "pulseaudio": {
+    "format": "VOL {volume}%"
+  },
+  */
+  "tooltip": false  // disable tooltips globally for cleanliness
+}

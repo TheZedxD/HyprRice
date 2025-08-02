@@ -1,0 +1,41 @@
+# Alacritty Terminal Configuration - Matrix Theme
+env:
+  TERM: xterm-256color
+
+colors:
+  # Default colors
+  primary:
+    background: '0x000000'   # black background
+    foreground: '0x27F546'   # bright green text
+  cursor:
+    text: '0x000000'         # cursor text (when block cursor covers text)
+    cursor: '0x27F546'       # cursor color (green)
+  selection:
+    text: '0x000000'         # text color when selected
+    background: '0x27F546'   # selection highlight background (green)
+
+  # Normal ANSI colors
+  normal:
+    black:   '0x000000'
+    red:     '0xFF0000'
+    green:   '0x009417'   # use secondary green for "green"
+    yellow:  '0xFFFF00'
+    blue:    '0x0000FF'
+    magenta: '0xFF00FF'
+    cyan:    '0x00FFFF'
+    white:   '0xC0C0C0'
+  # Bright ANSI colors
+  bright:
+    black:   '0x505050'
+    red:     '0xFF5555'
+    green:   '0x27F546'   # bright green
+    yellow:  '0xFFFF55'
+    blue:    '0x5555FF'
+    magenta: '0xFF55FF'
+    cyan:    '0x55FFFF'
+    white:   '0xFFFFFF'
+
+font:
+  normal:
+    family: monospace
+    size: 11.0
