@@ -24,8 +24,8 @@ fi
 
 mkdir -p "$CONFIG_DEST"
 for dir in alacritty hypr waybar wofi; do
-    mkdir -p "$CONFIG_DEST/$dir"
-    cp -r ".config/$dir/." "$CONFIG_DEST/$dir/"
+    rm -rf "$CONFIG_DEST/$dir"
+    cp -r ".config/$dir" "$CONFIG_DEST/"
     printf 'Installed %s configuration.\n' "$dir"
 done
 

@@ -46,9 +46,9 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 | **Super + F** | Launch Dolphin file manager |
 | **Super + B** | Launch Firefox browser |
 | **Super + C** / **Super + V** | Toggle floating mode |
-| **Super + V** | Center window on screen |
+| **Super + V** | Center and widen window for easy moving |
 | **Super + Arrow Keys** | Move focus left/down/up/right |
-| **Super + Ctrl + Left/Right** | Move window to previous/next workspace |
+| **Super + Ctrl + Arrow Keys** | Move window to adjacent workspace |
 | **Super + [1-9]** | Switch to workspace 1-9 |
 
 ## Notes
