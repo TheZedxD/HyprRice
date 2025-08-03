@@ -49,6 +49,19 @@ else
     fi
 fi
 
+echo -e "${BLUE}Running Hyprland --validate...${RESET}"
+if command -v hyprland >/dev/null 2>&1; then
+    if hyprland --config "$HYPR_CONF" --validate >/tmp/hypr_validate 2>&1; then
+        echo -e "Hyprland validation ${GREEN}[OK]${RESET}"
+    else
+        echo -e "Hyprland validation ${RED}[ERROR]${RESET}:"
+        cat /tmp/hypr_validate
+        errors=$((errors+1))
+    fi
+else
+    echo -e "${YELLOW}[WARN]${RESET} hyprland not found; skipping full config validation"
+fi
+
 echo -e "${BLUE}Checking Hyprland exec commands...${RESET}"
 if [[ -f "$HYPR_CONF" ]]; then
     declare -A seen

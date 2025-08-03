@@ -8,13 +8,36 @@ window#waybar {
   color: #00ff00;
 }
 
+window#waybar .module {
+  padding: 0 6px;
+  margin: 0 4px;
+  border-radius: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+window#waybar .module:hover {
+  background: #003300;
+  color: #ffffff;
+}
+
 #workspaces button {
-  padding: 0 4px;
+  padding: 0 6px;
+  margin: 0 2px;
   background: transparent;
+  border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
 #workspaces button.active {
   background: #005500;
+}
+
+#workspaces button:hover {
+  background: #003300;
+}
+
+#workspaces {
+  margin-left: 6px;
 }
 
 #pulseaudio.muted {
