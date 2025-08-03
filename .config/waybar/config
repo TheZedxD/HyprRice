@@ -25,7 +25,7 @@
     "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
     "tooltip-format": "{:%A, %B %d %Y}",
-    "on-click": "alacritty -e cal"
+    "on-click": "gsimplecal"
   },
   "pulseaudio": {
     "format": " VOL {volume}%",
@@ -55,7 +55,7 @@
     "on-click": "alacritty -e htop"
   },
   "disk": {
-    "format": " {free} free",
+    "format": " {free}/{total}",
     "path": "/",
     "tooltip": true,
     "tooltip-format": "{used} used / {total}",
