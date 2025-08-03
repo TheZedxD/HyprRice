@@ -8,7 +8,7 @@
    cd HyprRice
    ./install.sh
    ```
-   The script installs required packages and copies the configuration into `~/.config` for the current user.
+   The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
 
 ### Packages installed
 
@@ -25,6 +25,8 @@ The install and update scripts ensure the following packages are present:
 - grim
 - gvfs
 - gsimplecal
+- greetd
+- greetd-tuigreet
 - htop
 - hyprland
 - jq
@@ -52,6 +54,10 @@ The install and update scripts ensure the following packages are present:
 - xdg-desktop-portal-hyprland
 - xfce4-power-manager
 - xfce4-settings
+
+On reboot you'll see a neon green `greetd` prompt. After authenticating, Hyprland starts automatically.
+
+The installer attempts to grab the `tuigreet` greeter from the official repositories and falls back to `greetd-tuigreet-bin` via `yay` or `paru`. If no AUR helper is detected you'll need to install the greeter manually.
 
 ## Update
 
@@ -103,7 +109,7 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 
 ## Notes
 
-The install script installs all required packages including a polkit agent, notification daemon, and NetworkManager.
+The install script installs all required packages including a polkit agent, notification daemon, NetworkManager, and the `greetd` login manager.
 
 ## Waybar Actions
 
