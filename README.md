@@ -2,13 +2,14 @@
 
 ## Installation (Arch Linux)
 
-1. Clone this repository and run the installer:
+1. Remove any previous copy, clone this repository, and run the installer:
    ```bash
-   git clone https://github.com/<your_user>/HyprRice.git
+   rm -rf HyprRice
+   git clone https://github.com/YOUR_GITHUB_USERNAME/HyprRice.git
    cd HyprRice
    ./install.sh
    ```
-   The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
+   Replace `YOUR_GITHUB_USERNAME` with your GitHub account name. The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
 
 ### Packages installed
 
@@ -118,7 +119,7 @@ The install script installs all required packages including a polkit agent, noti
 | Clock | Open `gsimplecal` calendar |
 | Audio | Launch `pavucontrol` |
 | Network | Launch `nm-connection-editor` |
-| Battery | Open `xfce4-power-manager-settings` |
+| Battery | Open `xfce4-power-manager-settings` (provided by `xfce4-power-manager`) |
 | Disk | Launch `ncdu` in Alacritty |
 
 All modules display tooltips on hover.
