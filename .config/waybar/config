@@ -6,17 +6,27 @@
     "icon-size": 16,
     "spacing": 10
   },
-  "modules-left": ["workspaces"],
-  "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "battery", "tray"],
-
+  "modules-left": [
+    "workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "cpu",
+    "memory",
+    "disk",
+    "battery",
+    "tray"
+  ],
   "clock": {
     "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
     "tooltip-format": "{:%A, %B %d %Y}",
     "on-click": "alacritty -e cal"
   },
-
   "pulseaudio": {
     "format": " VOL {volume}%",
     "format-muted": " VOL {volume}%",
@@ -24,7 +34,6 @@
     "tooltip-format": "Volume: {volume}%",
     "on-click": "pavucontrol"
   },
-
   "network": {
     "format-wifi": " NET {signalStrength}%",
     "format-ethernet": " NET {ipaddr}",
@@ -33,29 +42,25 @@
     "tooltip-format": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
     "on-click": "nm-connection-editor"
   },
-
   "cpu": {
     "format": " CPU {usage}%",
     "tooltip": true,
     "tooltip-format": "CPU usage: {usage}%",
     "on-click": "alacritty -e htop"
   },
-
   "memory": {
     "format": " MEM {used}G/{total}G",
     "tooltip": true,
     "tooltip-format": "Memory used: {used}G / {total}G",
     "on-click": "alacritty -e htop"
   },
-
   "disk": {
-    "format": " DISK {percentage_used}%",
+    "format": " {free} free",
     "path": "/",
     "tooltip": true,
-    "tooltip-format": "{used} / {total} used",
+    "tooltip-format": "{used} used / {total}",
     "on-click": "alacritty -e ncdu /"
   },
-
   "battery": {
     "format": " BAT {capacity}%",
     "format-charging": " BAT {capacity}%",
@@ -64,7 +69,6 @@
     "tooltip-format": "Battery: {capacity}%",
     "on-click": "xfce4-power-manager-settings"
   },
-
   "workspaces": {
     "format": "{id}",
     "sort-by-number": true,
