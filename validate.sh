@@ -16,6 +16,11 @@ CONFIG_DIR="$REPO_DIR/.config"
 HYPR_CONF="$CONFIG_DIR/hypr/hyprland.conf"
 WAYBAR_CONF="$CONFIG_DIR/waybar/config"
 
+echo -e "${BLUE}Auto-formatting Hyprland config...${RESET}"
+if [[ -f "$HYPR_CONF" ]]; then
+    sed -i 's/[ \t]*$//' "$HYPR_CONF"
+fi
+
 echo -e "${BLUE}Checking Hyprland config syntax...${RESET}"
 if [[ ! -f "$HYPR_CONF" ]]; then
     echo -e "Hyprland config ${RED}[ERROR]${RESET}: file not found at $HYPR_CONF"
@@ -87,7 +92,7 @@ fi
 # Commands that Waybar modules rely on. The power manager settings binary is
 # provided by the xfce4-power-manager package, so we check for the package's
 # main command here.
-WAYBAR_CMDS=(gsimplecal pavucontrol nm-connection-editor alacritty htop ncdu xfce4-power-manager)
+WAYBAR_CMDS=(gsimplecal pulsemixer nm-connection-editor alacritty htop ncdu xfce4-power-manager)
 missing_waybar=()
 for cmd in "${WAYBAR_CMDS[@]}"; do
     command -v "$cmd" >/dev/null 2>&1 || missing_waybar+=("$cmd")
@@ -101,7 +106,8 @@ fi
 
 echo -e "${BLUE}Checking required packages...${RESET}"
 packages=(
-    alacritty archlinux-xdg-menu bluez bluez-utils blueman brightnessctl desktop-file-utils firefox grim gvfs gsimplecal greetd greetd-tuigreet htop hyprland jq ncdu networkmanager network-manager-applet nm-connection-editor nwg-look pamixer pavucontrol polkit-gnome power-profiles-daemon slurp swappy swaybg swayidle swaylock swaync thunar ttf-font-awesome ttf-jetbrains-mono-nerd waybar wlogout wofi xdg-desktop-portal xdg-desktop-portal-hyprland xfce4-power-manager xfce4-settings xorg-xwayland
+    alacritty archlinux-xdg-menu bluez bluez-utils blueman brightnessctl desktop-file-utils firefox grim gvfs gsimplecal greetd
+greetd-tuigreet htop hyprland jq ncdu networkmanager network-manager-applet nm-connection-editor nwg-look pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils pulsemixer polkit-gnome power-profiles-daemon slurp swappy swaybg swayidle swaylock swaync thunar ttf-font-awesome ttf-jetbrains-mono-nerd waybar wlogout wofi xdg-desktop-portal xdg-desktop-portal-hyprland xfce4-power-manager xfce4-settings xorg-xwayland
 )
 if command -v pacman >/dev/null 2>&1; then
     missing_pkgs=()
