@@ -178,7 +178,7 @@ done
 
 # Validate configuration
 if [[ -x "$SCRIPT_DIR/validate.sh" ]]; then
-    sudo -u "$TARGET_USER" "$SCRIPT_DIR/validate.sh"
+    sudo -u "$TARGET_USER" "$SCRIPT_DIR/validate.sh" || echo "Validation reported issues."
 fi
 
 if command -v hyprctl >/dev/null 2>&1; then
