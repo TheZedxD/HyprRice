@@ -35,7 +35,6 @@ packages=(
     firefox
     grim
     gvfs
-    gsimplecal
     greetd
     greetd-tuigreet
     htop
@@ -63,6 +62,7 @@ packages=(
     thunar
     ttf-font-awesome
     ttf-jetbrains-mono-nerd
+    util-linux
     waybar
     wlogout
     wofi

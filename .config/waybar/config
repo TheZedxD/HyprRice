@@ -7,11 +7,10 @@
     "spacing": 10
   },
   "modules-left": [
-    "workspaces"
-  ],
-  "modules-center": [
+    "workspaces",
     "clock"
   ],
+  "modules-center": [],
   "modules-right": [
     "pulseaudio",
     "network",
@@ -24,32 +23,39 @@
   "clock": {
     "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
-    "tooltip-format": "{:%A, %B %d %Y}",
-    "on-click": "gsimplecal"
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "on-click": "alacritty -e cal",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "right",
+      "format": {
+        "today": "<b><u>{}</u></b>"
+      }
+    }
   },
   "pulseaudio": {
-    "format": " VOL {volume}%",
-    "format-muted": " VOL {volume}%",
+    "format": "   VOL {volume}%",
+    "format-muted": "   VOL {volume}%",
     "tooltip": true,
     "tooltip-format": "Volume: {volume}%",
     "on-click": "alacritty -e pulsemixer"
   },
   "network": {
-    "format-wifi": " NET {signalStrength}%",
-    "format-ethernet": " NET {ipaddr}",
-    "format-disconnected": " NET down",
+    "format-wifi": "   NET {signalStrength}%",
+    "format-ethernet": "   NET {ipaddr}",
+    "format-disconnected": "   NET down",
     "tooltip": true,
     "tooltip-format": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
     "on-click": "nm-connection-editor"
   },
   "cpu": {
-    "format": " CPU {usage}%",
+    "format": "   CPU {usage}%",
     "tooltip": true,
     "tooltip-format": "CPU usage: {usage}%",
     "on-click": "alacritty -e htop"
   },
   "memory": {
-    "format": " MEM {used}G/{total}G",
+    "format": "󰍛   MEM {used}G/{total}G",
     "tooltip": true,
     "tooltip-format": "Memory used: {used}G / {total}G",
     "on-click": "alacritty -e htop"
@@ -62,9 +68,9 @@
     "on-click": "alacritty -e ncdu /"
   },
   "battery": {
-    "format": " BAT {capacity}%",
-    "format-charging": " BAT {capacity}%",
-    "format-full": " BAT full",
+    "format": "   BAT {capacity}%",
+    "format-charging": "   BAT {capacity}%",
+    "format-full": "   BAT full",
     "tooltip": true,
     "tooltip-format": "Battery: {capacity}%",
     "on-click": "xfce4-power-manager-settings"
