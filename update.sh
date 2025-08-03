@@ -161,6 +161,7 @@ for dir in "${DIRS[@]}"; do
     echo -e "\nSyncing $dir configuration..."
     rm -rf "$CONFIG_DEST/$dir"
     cp -r ".config/$dir" "$CONFIG_DEST/"
+    chown -R "$TARGET_USER":"$TARGET_USER" "$CONFIG_DEST/$dir" || true
     step=$((step+1))
     progress $step $total
 done
@@ -168,6 +169,11 @@ done
 # Validate configuration
 if [[ -x "$SCRIPT_DIR/validate.sh" ]]; then
     sudo -u "$TARGET_USER" "$SCRIPT_DIR/validate.sh"
+fi
+
+if command -v hyprctl >/dev/null 2>&1; then
+    echo -e "\nReloading Hyprland configuration..."
+    sudo -u "$TARGET_USER" hyprctl reload || true
 fi
 
 echo -e "\nHyprRice update complete."
