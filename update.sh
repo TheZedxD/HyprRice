@@ -9,6 +9,7 @@ CONFIG_DEST="$TARGET_HOME/.config"
 DIRS=(alacritty hypr waybar wofi)
 
 # Ensure required packages are installed
+# Added swappy for screenshot annotation and xorg-xwayland for X11 support
 packages=(
     alacritty
     archlinux-xdg-menu
@@ -34,6 +35,7 @@ packages=(
     polkit-gnome
     power-profiles-daemon
     slurp
+    swappy
     swaybg
     swayidle
     swaylock
@@ -48,6 +50,7 @@ packages=(
     xdg-desktop-portal-hyprland
     xfce4-power-manager
     xfce4-settings
+    xorg-xwayland
 )
 if command -v pacman >/dev/null 2>&1; then
     missing=()
