@@ -9,6 +9,9 @@ CONFIG_DEST="$TARGET_HOME/.config"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 DIRS=(alacritty hypr waybar wofi)
 
+# Capture Hyprland instance signature so hyprctl can talk to the running compositor
+HYPR_SIG=$(sudo -u "$TARGET_USER" printenv HYPRLAND_INSTANCE_SIGNATURE 2>/dev/null || true)
+
 # Ensure PipeWire audio stack
 if command -v pacman >/dev/null 2>&1; then
     PA_PKGS=$(pacman -Qq | grep -E '^pulseaudio' || true)
@@ -159,8 +162,15 @@ progress $step $total
 mkdir -p "$CONFIG_DEST"
 for dir in "${DIRS[@]}"; do
     echo -e "\nSyncing $dir configuration..."
-    rm -rf "$CONFIG_DEST/$dir"
-    cp -r ".config/$dir" "$CONFIG_DEST/"
+    src="$SCRIPT_DIR/.config/$dir/"
+    dest="$CONFIG_DEST/$dir/"
+    mkdir -p "$dest"
+    if command -v rsync >/dev/null 2>&1; then
+        rsync -a --delete "$src" "$dest"
+    else
+        rm -rf "$CONFIG_DEST/$dir"
+        cp -r "$src" "$CONFIG_DEST/"
+    fi
     chown -R "$TARGET_USER":"$TARGET_USER" "$CONFIG_DEST/$dir" || true
     step=$((step+1))
     progress $step $total
@@ -173,7 +183,11 @@ fi
 
 if command -v hyprctl >/dev/null 2>&1; then
     echo -e "\nReloading Hyprland configuration..."
-    sudo -u "$TARGET_USER" hyprctl reload || true
+    if [[ -n "$HYPR_SIG" ]]; then
+        sudo -u "$TARGET_USER" HYPRLAND_INSTANCE_SIGNATURE="$HYPR_SIG" hyprctl reload || true
+    else
+        sudo -u "$TARGET_USER" hyprctl reload || true
+    fi
 fi
 
 echo -e "\nHyprRice update complete."

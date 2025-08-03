@@ -72,6 +72,17 @@ After pulling the latest changes, run the updater to refresh your configuration:
 ./update.sh
 ```
 
+## System Check
+
+Run the diagnostic script to verify graphics, audio and core services are ready:
+
+```bash
+./system_check.sh
+```
+
+The script reports missing commands or inactive services so you can install the
+appropriate packages or start the required daemons.
+
 ## About
 
 HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.com/hyprwm/Hyprland) Wayland compositor. It aims for a clean and minimal look with sharp edges and bright green accents.
