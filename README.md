@@ -25,7 +25,7 @@ The install and update scripts ensure the following packages are present:
 - firefox
 - grim
 - gvfs
-- gsimplecal
+- util-linux
 - greetd
 - greetd-tuigreet
 - htop
@@ -94,9 +94,15 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 - Animations disabled for snappy performance
 - Small inner gaps for tiling and a minimal top gap for Waybar
 - Waybar for system status and Wofi as application launcher
-- Waybar modules show tooltips and launch pulsemixer, NetworkManager, calendar, and power settings when clicked
+- Waybar modules show tooltips and launch pulsemixer, NetworkManager, terminal calendar, and power settings when clicked
 - Autostarts Waybar along with a polkit agent, NetworkManager, Bluetooth, power and notification applets
 - Solid black wallpaper via swaybg
+
+## Features / Updates
+
+- Workspace indicator and clock sit on the left; hovering the clock shows a monthly calendar with the current date underlined.
+- Cycle through workspaces with <kbd>Super</kbd>+<kbd>Tab</kbd> and <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>; the Waybar workspace module reflects the active desktop.
+- System status icons (CPU, memory, network, volume, battery) now use consistent spacing and a working memory glyph.
 
 ## Keybindings
 
@@ -118,7 +124,8 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 | **Super + Ctrl + Arrow Keys** | Send window to adjacent workspace |
 | **Super + [1-9]** | Switch to workspace 1-9 |
 | **Super + Shift + [1-9]** | Move window to workspace 1-9 |
-| **Super + Tab** | Switch to previous workspace |
+| **Super + Tab** | Switch to next workspace |
+| **Super + Shift + Tab** | Switch to previous workspace |
 | **Alt + Tab** | Cycle through windows |
 | **Print** | Screenshot full screen |
 | **Super + S** | Screenshot region |
@@ -131,7 +138,7 @@ The install script installs all required packages including a polkit agent, noti
 
 | Module | Click Action |
 |--------|--------------|
-| Clock | Open `gsimplecal` calendar |
+| Clock | Open `cal` in Alacritty |
 | Audio | Launch `pulsemixer` |
 | Network | Launch `nm-connection-editor` |
 | Battery | Open `xfce4-power-manager-settings` (provided by `xfce4-power-manager`) |
