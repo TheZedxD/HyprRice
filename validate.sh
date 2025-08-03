@@ -98,7 +98,7 @@ fi
 
 echo -e "${BLUE}Checking required packages...${RESET}"
 packages=(
-    alacritty archlinux-xdg-menu bluez bluez-utils blueman brightnessctl desktop-file-utils firefox grim gvfs gsimplecal htop hyprland jq ncdu networkmanager network-manager-applet nm-connection-editor nwg-look pamixer pavucontrol polkit-gnome power-profiles-daemon slurp swappy swaybg swayidle swaylock swaync thunar ttf-font-awesome ttf-jetbrains-mono-nerd waybar wlogout wofi xdg-desktop-portal xdg-desktop-portal-hyprland xfce4-power-manager xfce4-settings xorg-xwayland
+    alacritty archlinux-xdg-menu bluez bluez-utils blueman brightnessctl desktop-file-utils firefox grim gvfs gsimplecal greetd greetd-tuigreet htop hyprland jq ncdu networkmanager network-manager-applet nm-connection-editor nwg-look pamixer pavucontrol polkit-gnome power-profiles-daemon slurp swappy swaybg swayidle swaylock swaync thunar ttf-font-awesome ttf-jetbrains-mono-nerd waybar wlogout wofi xdg-desktop-portal xdg-desktop-portal-hyprland xfce4-power-manager xfce4-settings xorg-xwayland
 )
 if command -v pacman >/dev/null 2>&1; then
     missing_pkgs=()
