@@ -84,7 +84,10 @@ else
     echo -e "${YELLOW}[WARN]${RESET} jq not found; skipping Waybar JSON validation"
 fi
 
-WAYBAR_CMDS=(gsimplecal pavucontrol nm-connection-editor alacritty htop ncdu xfce4-power-manager-settings)
+# Commands that Waybar modules rely on. The power manager settings binary is
+# provided by the xfce4-power-manager package, so we check for the package's
+# main command here.
+WAYBAR_CMDS=(gsimplecal pavucontrol nm-connection-editor alacritty htop ncdu xfce4-power-manager)
 missing_waybar=()
 for cmd in "${WAYBAR_CMDS[@]}"; do
     command -v "$cmd" >/dev/null 2>&1 || missing_waybar+=("$cmd")
