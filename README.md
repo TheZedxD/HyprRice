@@ -29,8 +29,8 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 - Animations disabled for snappy performance
 - Small inner gaps for tiling and a minimal top gap for Waybar
 - Waybar for system status and Wofi as application launcher
-- Waybar modules show tooltips and launch pavucontrol or NetworkManager when clicked
-- Autostarts Waybar and an Alacritty terminal
+- Waybar modules show tooltips and launch pavucontrol, NetworkManager, calendar, and power settings when clicked
+- Autostarts Waybar along with a polkit agent, NetworkManager, Bluetooth, power and notification applets
 - Solid black wallpaper via swaybg
 
 ## Keybindings
@@ -39,25 +39,37 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 |------------|--------|
 | **Super + Enter** | Open Alacritty terminal |
 | **Super + Space** | Launch Wofi app launcher |
-| **Super + Q** | Close focused window |
-| **Super + F** | Launch Dolphin file manager |
+| **Super + E** | Open Thunar file manager |
 | **Super + B** | Launch Firefox browser |
-| **Super + C** | Toggle centered floating zoom |
-| **Super + V** | Center window |
-| **Super + Arrow Keys** | Move focus left/down/up/right |
-| **Super + Ctrl + Arrow Keys** | Move window to adjacent workspace |
+| **Super + L** | Lock the screen |
+| **Super + M** | Open logout menu |
+| **Super + Q** | Close focused window |
+| **Super + W** | Force close window |
+| **Super + F** | Toggle fullscreen |
+| **Super + V** | Toggle floating mode |
+| **Super + J** | Toggle split orientation |
+| **Super + Arrow Keys** | Focus window left/down/up/right |
+| **Super + Shift + Arrow Keys** | Move window left/down/up/right |
+| **Super + Ctrl + Arrow Keys** | Send window to adjacent workspace |
 | **Super + [1-9]** | Switch to workspace 1-9 |
+| **Super + Shift + [1-9]** | Move window to workspace 1-9 |
+| **Super + Tab** | Switch to previous workspace |
+| **Alt + Tab** | Cycle through windows |
+| **Print** | Screenshot full screen |
+| **Super + S** | Screenshot region |
 
 ## Notes
 
-The install script attempts to install all required packages. Additional tools like a polkit agent or notification daemon may be needed for a full desktop experience.
+The install script installs all required packages including a polkit agent, notification daemon, and NetworkManager.
 
 ## Waybar Actions
 
 | Module | Click Action |
 |--------|--------------|
-| Clock | Open calendar in Alacritty |
+| Clock | Open `gsimplecal` calendar |
 | Audio | Launch `pavucontrol` |
-| Network | Launch `nmtui` in Alacritty |
+| Network | Launch `nm-connection-editor` |
+| Battery | Open `xfce4-power-manager-settings` |
+| Disk | Launch `ncdu` in Alacritty |
 
 All modules display tooltips on hover.

@@ -11,25 +11,43 @@ DIRS=(alacritty hypr waybar wofi)
 # Ensure required packages are installed
 packages=(
     alacritty
-    hyprland
-    waybar
-    wofi
-    swaybg
-    dolphin
+    archlinux-xdg-menu
+    bluez
+    bluez-utils
+    blueman
+    brightnessctl
+    desktop-file-utils
     firefox
-    pavucontrol
+    grim
+    gvfs
+    gsimplecal
+    htop
+    hyprland
+    jq
+    ncdu
     networkmanager
     network-manager-applet
     nm-connection-editor
-    xfce4-power-manager-settings
-    htop
-    ncdu
-    jq
-    archlinux-xdg-menu
-    desktop-file-utils
+    nwg-look
+    pamixer
+    pavucontrol
+    polkit-gnome
+    power-profiles-daemon
+    slurp
+    swaybg
+    swayidle
+    swaylock
+    swaync
+    thunar
+    ttf-font-awesome
+    ttf-jetbrains-mono-nerd
+    waybar
+    wlogout
+    wofi
     xdg-desktop-portal
     xdg-desktop-portal-hyprland
-    polkit-gnome
+    xfce4-power-manager
+    xfce4-settings
 )
 if command -v pacman >/dev/null 2>&1; then
     missing=()
@@ -48,8 +66,13 @@ fi
 if command -v kbuildsycoca6 >/dev/null 2>&1; then
     sudo -u "$TARGET_USER" XDG_MENU_PREFIX=arch- kbuildsycoca6 || true
 fi
+if command -v update-desktop-database >/dev/null 2>&1; then
+    sudo -u "$TARGET_USER" update-desktop-database || true
+fi
 if command -v systemctl >/dev/null 2>&1; then
     sudo systemctl enable --now NetworkManager.service || true
+    sudo systemctl enable --now bluetooth.service || true
+    sudo systemctl enable --now power-profiles-daemon.service || true
     sudo -u "$TARGET_USER" systemctl --user restart xdg-desktop-portal-hyprland.service || true
 fi
 
