@@ -7,7 +7,7 @@
     "spacing": 10
   },
   "modules-left": [
-    "workspaces",
+    "hyprland/workspaces",
     "clock"
   ],
   "modules-center": [],
@@ -23,7 +23,7 @@
   "clock": {
     "format": "{:%Y-%m-%d %H:%M}",
     "tooltip": true,
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "tooltip-format": "<tt><big>{calendar}</big></tt>",
     "on-click": "alacritty -e cal",
     "calendar": {
       "mode": "month",
@@ -75,9 +75,9 @@
     "tooltip-format": "Battery: {capacity}%",
     "on-click": "xfce4-power-manager-settings"
   },
-  "workspaces": {
+  "hyprland/workspaces": {
     "format": "{id}",
-    "sort-by-number": true,
+    "active-only": true,
     "on-scroll-up": "hyprctl dispatch workspace -1",
     "on-scroll-down": "hyprctl dispatch workspace +1",
     "on-click": "hyprctl dispatch workspace {id}",

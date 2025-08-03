@@ -20,7 +20,7 @@ window#waybar .module:hover {
   color: #ffffff;
 }
 
-#workspaces button {
+#hyprland-workspaces button {
   padding: 0 6px;
   margin: 0 2px;
   background: transparent;
@@ -28,15 +28,15 @@ window#waybar .module:hover {
   transition: background 0.3s ease;
 }
 
-#workspaces button.active {
+#hyprland-workspaces button.active {
   background: #005500;
 }
 
-#workspaces button:hover {
+#hyprland-workspaces button:hover {
   background: #003300;
 }
 
-#workspaces {
+#hyprland-workspaces {
   margin-left: 6px;
 }
 
