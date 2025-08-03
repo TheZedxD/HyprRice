@@ -32,7 +32,7 @@
     "format-muted": " VOL {volume}%",
     "tooltip": true,
     "tooltip-format": "Volume: {volume}%",
-    "on-click": "pavucontrol"
+    "on-click": "alacritty -e pulsemixer"
   },
   "network": {
     "format-wifi": " NET {signalStrength}%",

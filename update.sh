@@ -6,7 +6,19 @@ set -euo pipefail
 TARGET_USER=${SUDO_USER:-${USER:-$(id -un)}}
 TARGET_HOME=$(eval echo "~$TARGET_USER")
 CONFIG_DEST="$TARGET_HOME/.config"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 DIRS=(alacritty hypr waybar wofi)
+
+# Ensure PipeWire audio stack
+if command -v pacman >/dev/null 2>&1; then
+    PA_PKGS=$(pacman -Qq | grep -E '^pulseaudio' || true)
+    if [[ -n $PA_PKGS ]]; then
+        sudo pacman -Rns --noconfirm $PA_PKGS || true
+    fi
+    sudo pacman -S --needed --noconfirm pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils pulsemixer
+    sudo -u "$TARGET_USER" systemctl --user enable --now pipewire pipewire-pulse wireplumber || true
+    echo -e '\e[1;33mAudio stack switched to PipeWire. You must REBOOT for changes to take full effect.\e[0m'
+fi
 
 # Ensure required packages are installed
 # Added swappy for screenshot annotation and xorg-xwayland for X11 support
@@ -32,8 +44,12 @@ packages=(
     network-manager-applet
     nm-connection-editor
     nwg-look
-    pamixer
-    pavucontrol
+    pipewire
+    pipewire-pulse
+    pipewire-alsa
+    wireplumber
+    alsa-utils
+    pulsemixer
     polkit-gnome
     power-profiles-daemon
     slurp
@@ -148,5 +164,10 @@ for dir in "${DIRS[@]}"; do
     step=$((step+1))
     progress $step $total
 done
+
+# Validate configuration
+if [[ -x "$SCRIPT_DIR/validate.sh" ]]; then
+    sudo -u "$TARGET_USER" "$SCRIPT_DIR/validate.sh"
+fi
 
 echo -e "\nHyprRice update complete."
