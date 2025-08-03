@@ -10,6 +10,49 @@
    ```
    The script installs required packages and copies the configuration into `~/.config` for the current user.
 
+### Packages installed
+
+The install and update scripts ensure the following packages are present:
+
+- alacritty
+- archlinux-xdg-menu
+- bluez
+- bluez-utils
+- blueman
+- brightnessctl
+- desktop-file-utils
+- firefox
+- grim
+- gvfs
+- gsimplecal
+- htop
+- hyprland
+- jq
+- ncdu
+- network-manager-applet
+- networkmanager
+- nm-connection-editor
+- nwg-look
+- pamixer
+- pavucontrol
+- polkit-gnome
+- power-profiles-daemon
+- slurp
+- swaybg
+- swayidle
+- swaylock
+- swaync
+- thunar
+- ttf-font-awesome
+- ttf-jetbrains-mono-nerd
+- waybar
+- wlogout
+- wofi
+- xdg-desktop-portal
+- xdg-desktop-portal-hyprland
+- xfce4-power-manager
+- xfce4-settings
+
 ## Update
 
 After pulling the latest changes, run the updater to refresh your configuration:
