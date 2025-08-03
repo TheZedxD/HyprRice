@@ -9,34 +9,44 @@ check_cmd() {
     local cmd="$1"
     if command -v "$cmd" >/dev/null 2>&1; then
         echo -e "${GREEN}[OK]${RESET} command '$cmd' found"
+        return 0
     else
         echo -e "${RED}[MISSING]${RESET} command '$cmd' not found"
         errors=$((errors+1))
+        return 1
     fi
 }
 
 check_service() {
     local svc="$1"
-    if systemctl is-active --quiet "$svc"; then
-        echo -e "${GREEN}[OK]${RESET} service '$svc' active"
+    if command -v systemctl >/dev/null 2>&1; then
+        if systemctl is-active --quiet "$svc" 2>/dev/null; then
+            echo -e "${GREEN}[OK]${RESET} service '$svc' active"
+        else
+            echo -e "${RED}[FAIL]${RESET} service '$svc' inactive"
+            errors=$((errors+1))
+        fi
     else
-        echo -e "${RED}[FAIL]${RESET} service '$svc' inactive"
-        errors=$((errors+1))
+        echo -e "${YELLOW}[WARN]${RESET} systemctl not found; cannot verify '$svc'"
     fi
 }
 
 echo "Checking graphics stack..."
-check_cmd glxinfo && glxinfo | grep -E 'OpenGL renderer|OpenGL version' || true
+if check_cmd glxinfo; then
+    glxinfo | grep -E 'OpenGL renderer|OpenGL version' || true
+fi
 
 echo "Checking audio stack..."
-check_cmd pactl && pactl info >/dev/null 2>&1 || errors=$((errors+1))
+if check_cmd pactl; then
+    pactl info >/dev/null 2>&1 || errors=$((errors+1))
+fi
 check_service pipewire
 check_service wireplumber
 
 echo "Checking core commands..."
 for cmd in hyprland hyprctl waybar wofi swaybg swayidle swaylock alacritty firefox; do
-    check_cmd "$cmd"
-fi
+    check_cmd "$cmd" || true
+done
 
 echo "Checking system services..."
 for svc in NetworkManager bluetooth power-profiles-daemon; do
