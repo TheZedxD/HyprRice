@@ -24,7 +24,7 @@ AUR_PKGS=(greetd-tuigreet)
 missing=()
 for pkg in "${PACMAN_PKGS[@]}"; do
     pacman -Qi "$pkg" >/dev/null 2>&1 || missing+=("$pkg")
-fi
+done
 if ((${#missing[@]})); then
     echo -e "Installing packages: ${missing[*]}"
     sudo pacman -S --needed --noconfirm "${missing[@]}"
