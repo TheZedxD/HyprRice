@@ -9,7 +9,7 @@
    cd HyprRice
    ./install.sh
    ```
-    Replace `YOUR_GITHUB_USERNAME` with your GitHub account name. The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
+    Replace `YOUR_GITHUB_USERNAME` with your GitHub account name. The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user. Existing display managers (gdm, sddm, lightdm, etc.) are disabled so `greetd` becomes active.
 
 For a complete setup including fixes and the optional TV application, run the
 umbrella script which logs progress to `setup.log`:
@@ -167,7 +167,7 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 
 ## Notes
 
-The install script installs all required packages including a polkit agent, notification daemon, NetworkManager, and the `greetd` login manager.
+The install script installs all required packages including a polkit agent, notification daemon, NetworkManager, and the `greetd` login manager while disabling other display managers.
 
 ## Waybar Actions
 
