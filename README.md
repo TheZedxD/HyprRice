@@ -129,7 +129,7 @@ HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.co
 - Animations disabled for snappy performance
 - Small inner gaps for tiling and a minimal top gap for Waybar
 - Waybar for system status and Wofi as application launcher
-- Waybar modules show tooltips and launch pulsemixer, NetworkManager, terminal calendar, and power settings when clicked
+- Waybar modules show tooltips and launch pulsemixer, NetworkManager, terminal calendar, wlogout power menu, and power settings when clicked
 - Autostarts Waybar along with a polkit agent, NetworkManager, Bluetooth, power and notification applets
 - Solid black wallpaper via swaybg
 
@@ -173,6 +173,7 @@ The install script installs all required packages including a polkit agent, noti
 
 | Module | Click Action |
 |--------|--------------|
+| Power | Open `wlogout` power menu |
 | Clock | Open `cal` in Alacritty |
 | Audio | Launch `pulsemixer` |
 | Network | Launch `nm-connection-editor` |

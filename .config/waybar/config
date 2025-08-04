@@ -8,6 +8,7 @@
   },
   "modules-left": [
     "hyprland/workspaces",
+    "custom/power",
     "clock"
   ],
   "modules-center": [],
@@ -32,6 +33,12 @@
         "today": "<b><u>{}</u></b>"
       }
     }
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Power menu",
+    "on-click": "wlogout"
   },
   "pulseaudio": {
     "format": "   VOL {volume}%",
