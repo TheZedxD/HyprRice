@@ -63,6 +63,16 @@ packages=(
     ttf-font-awesome
     ttf-jetbrains-mono-nerd
     util-linux
+    ffmpeg
+    gstreamer
+    gst-plugins-good
+    gst-libav
+    python
+    python-pip
+    python-pyqt5
+    qt5-multimedia
+    qt5-wayland
+    yt-dlp
     waybar
     wlogout
     wofi
