@@ -7,6 +7,7 @@ TARGET_USER=${SUDO_USER:-${USER:-$(id -un)}}
 TARGET_HOME=$(eval echo "~$TARGET_USER")
 CONFIG_DEST="$TARGET_HOME/.config"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
 DIRS=(alacritty hypr waybar wofi)
 
 # Capture Hyprland instance signature so hyprctl can talk to the running compositor
@@ -70,6 +71,7 @@ packages=(
     gst-libav
     python
     python-pip
+    python-virtualenv
     python-pyqt5
     qt5-multimedia
     qt5-wayland
@@ -114,6 +116,11 @@ if command -v pacman >/dev/null 2>&1; then
     done
 else
     printf 'Warning: pacman not found; cannot verify dependencies.\n'
+fi
+
+# Ensure a `python` command is available for virtual environments
+if ! command -v python >/dev/null 2>&1 && command -v python3 >/dev/null 2>&1; then
+    sudo ln -sf "$(command -v python3)" /usr/bin/python
 fi
 
 # Rebuild application menus and ensure portals/services are running
