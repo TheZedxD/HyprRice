@@ -9,7 +9,13 @@
    cd HyprRice
    ./install.sh
    ```
-   Replace `YOUR_GITHUB_USERNAME` with your GitHub account name. The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
+    Replace `YOUR_GITHUB_USERNAME` with your GitHub account name. The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
+
+For a complete setup including fixes and the optional TV application, run:
+
+```bash
+./PC_Setup.sh
+```
 
 ### Packages installed
 
@@ -59,6 +65,16 @@ The install and update scripts ensure the following packages are present:
 - xdg-desktop-portal-hyprland
 - xfce4-power-manager
 - xfce4-settings
+- ffmpeg
+- gstreamer
+- gst-plugins-good
+- gst-libav
+- python
+- python-pip
+- python-pyqt5
+- qt5-multimedia
+- qt5-wayland
+- yt-dlp
 
 On reboot you'll see a neon green `greetd` prompt. After authenticating, Hyprland starts automatically.
 
@@ -82,6 +98,13 @@ Run the diagnostic script to verify graphics, audio and core services are ready:
 
 The script reports missing commands or inactive services so you can install the
 appropriate packages or start the required daemons.
+
+## TV Streaming Application Integration
+
+`PC_Setup.sh` can install a Python/Qt-based TV streaming application from the
+[`codexTest`](https://github.com/TheZedxD/codexTest) repository. After running
+the setup script, launch the app from your application menu or by running
+`python3 ~/codexTest/app.py`.
 
 ## About
 
