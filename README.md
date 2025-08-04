@@ -122,6 +122,8 @@ the setup script, launch the app from your application menu or by running
 
 HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.com/hyprwm/Hyprland) Wayland compositor. It aims for a clean and minimal look with sharp edges and bright green accents.
 
+For forward-looking improvements and advanced setup techniques, see the [Enhancement Guide](docs/ENHANCEMENT_GUIDE.md).
+
 ## Features
 
 - Neon green "Matrix" theme with solid active/inactive borders
