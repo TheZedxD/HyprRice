@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 # Validation script for HyprRice configuration
-set -uo pipefail
+set -Eeuo pipefail
+
+handle_error() {
+    local exit_code=$?
+    local line_number=$1
+    local command=$2
+    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
+    exit $exit_code
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
 
 RED='\e[31m'
 GREEN='\e[32m'

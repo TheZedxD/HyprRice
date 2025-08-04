@@ -2,7 +2,17 @@
 # Simple installer for HyprRice dotfiles.
 # Copies configuration files into the current user's ~/.config directory.
 # If run with sudo, files will be placed in the invoking user's home.
-set -euo pipefail
+set -Eeuo pipefail
+
+handle_error() {
+    local exit_code=$?
+    local line_number=$1
+    local command=$2
+    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
+    exit $exit_code
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
 
 TARGET_USER=${SUDO_USER:-$USER}
 TARGET_HOME=$(eval echo "~$TARGET_USER")

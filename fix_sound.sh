@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 # fix_sound.sh — purge PulseAudio, enable PipeWire, unmute channels
 
-set -uo pipefail
+set -Eeuo pipefail
+
+handle_error() {
+    local exit_code=$?
+    local line_number=$1
+    local command=$2
+    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
+    exit $exit_code
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
 RED='\e[31m'; GREEN='\e[32m'; YELLOW='\e[33m'; BOLD='\e[1m'; RESET='\e[0m'
 
 echo -e "${BOLD}${GREEN}▶ HyprRice Audio Repair${RESET}"
