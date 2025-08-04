@@ -7,8 +7,8 @@
     "spacing": 10
   },
   "modules-left": [
-    "hyprland/workspaces",
     "custom/power",
+    "hyprland/workspaces",
     "clock"
   ],
   "modules-center": [],
