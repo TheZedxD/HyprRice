@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 # Simple updater for HyprRice dotfiles.
 # Pulls latest git changes and re-installs configuration.
-set -euo pipefail
+set -Eeuo pipefail
+
+handle_error() {
+    local exit_code=$?
+    local line_number=$1
+    local command=$2
+    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
+    exit $exit_code
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
 
 TARGET_USER=${SUDO_USER:-${USER:-$(id -un)}}
 TARGET_HOME=$(eval echo "~$TARGET_USER")

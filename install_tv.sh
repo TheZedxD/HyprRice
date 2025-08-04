@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 # install_tv.sh: Clone and set up the optional TV application
-set -euo pipefail
+set -Eeuo pipefail
+
+handle_error() {
+    local exit_code=$?
+    local line_number=$1
+    local command=$2
+    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
+    exit $exit_code
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
 
 TV_REPO="https://github.com/TheZedxD/codexTest.git"
 TV_DIR="$HOME/codexTest"
