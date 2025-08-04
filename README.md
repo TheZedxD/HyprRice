@@ -11,10 +11,11 @@
    ```
     Replace `YOUR_GITHUB_USERNAME` with your GitHub account name. The script installs required packages, configures the `greetd` login manager and copies the configuration into `~/.config` for the current user.
 
-For a complete setup including fixes and the optional TV application, run:
+For a complete setup including fixes and the optional TV application, run the
+umbrella script which logs progress to `setup.log`:
 
 ```bash
-./PC_Setup.sh
+./setup.sh
 ```
 
 ### Packages installed
@@ -71,6 +72,7 @@ The install and update scripts ensure the following packages are present:
 - gst-libav
 - python
 - python-pip
+- python-virtualenv
 - python-pyqt5
 - qt5-multimedia
 - qt5-wayland
@@ -88,6 +90,16 @@ After pulling the latest changes, run the updater to refresh your configuration:
 ./update.sh
 ```
 
+## Python and virtual environments
+
+The setup and update scripts ensure a `python` command is available and install
+`python-virtualenv`. Create project-specific environments with:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
 ## System Check
 
 Run the diagnostic script to verify graphics, audio and core services are ready:
@@ -101,7 +113,7 @@ appropriate packages or start the required daemons.
 
 ## TV Streaming Application Integration
 
-`PC_Setup.sh` can install a Python/Qt-based TV streaming application from the
+`setup.sh` can install a Python/Qt-based TV streaming application from the
 [`codexTest`](https://github.com/TheZedxD/codexTest) repository. After running
 the setup script, launch the app from your application menu or by running
 `python3 ~/codexTest/app.py`.

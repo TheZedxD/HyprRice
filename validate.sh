@@ -119,7 +119,7 @@ fi
 
 echo -e "${BLUE}Checking required packages...${RESET}"
 packages=(
-    alacritty archlinux-xdg-menu bluez bluez-utils blueman brightnessctl desktop-file-utils firefox ffmpeg grim gvfs greetd greetd-tuigreet gstreamer gst-plugins-good gst-libav htop hyprland jq ncdu networkmanager network-manager-applet nm-connection-editor nwg-look pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils pulsemixer polkit-gnome power-profiles-daemon python python-pip python-pyqt5 qt5-multimedia qt5-wayland slurp swappy swaybg swayidle swaylock swaync thunar ttf-font-awesome ttf-jetbrains-mono-nerd util-linux waybar wlogout wofi xdg-desktop-portal xdg-desktop-portal-hyprland xfce4-power-manager xfce4-settings xorg-xwayland yt-dlp
+    alacritty archlinux-xdg-menu bluez bluez-utils blueman brightnessctl desktop-file-utils firefox ffmpeg grim gvfs greetd greetd-tuigreet gstreamer gst-plugins-good gst-libav htop hyprland jq ncdu networkmanager network-manager-applet nm-connection-editor nwg-look pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils pulsemixer polkit-gnome power-profiles-daemon python python-pip python-virtualenv python-pyqt5 qt5-multimedia qt5-wayland slurp swappy swaybg swayidle swaylock swaync thunar ttf-font-awesome ttf-jetbrains-mono-nerd util-linux waybar wlogout wofi xdg-desktop-portal xdg-desktop-portal-hyprland xfce4-power-manager xfce4-settings xorg-xwayland yt-dlp
 )
 if command -v pacman >/dev/null 2>&1; then
     missing_pkgs=()
