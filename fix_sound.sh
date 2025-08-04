@@ -16,7 +16,7 @@ REQ=(pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils pulsemixer)
 missing=()
 for p in "${REQ[@]}"; do
     pacman -Qi "$p" >/dev/null 2>&1 || missing+=("$p")
-fi
+done
 if ((${#missing[@]})); then
     sudo pacman -S --needed --noconfirm "${missing[@]}"
 fi

@@ -9,8 +9,7 @@ CFG_SRC="$SCRIPT_DIR/greetd/config.toml"
 CFG_DST="/etc/greetd/config.toml"
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${RED}Run as root to modify greetd config.${RESET}"
-    exit 1
+    exec sudo "$0" "$@"
 fi
 
 install -Dm644 "$CFG_SRC" "$CFG_DST"
