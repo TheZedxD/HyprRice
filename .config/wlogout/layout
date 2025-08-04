@@ -1,0 +1,5 @@
+logout,hyprctl dispatch exit,,Logout
+reboot,systemctl reboot,,Reboot
+shutdown,systemctl poweroff,,Shutdown
+lock,swaylock,,Lock
+suspend,systemctl suspend,,Suspend

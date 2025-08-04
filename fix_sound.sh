@@ -1,58 +1,41 @@
 #!/usr/bin/env bash
-# fix_sound.sh — purge PulseAudio, enable PipeWire, unmute channels
+# fix_sound.sh: migrate PulseAudio to PipeWire and restart services
+set -euo pipefail
 
-set -Eeuo pipefail
+GREEN="\e[32m"; RED="\e[31m"; YELLOW="\e[33m"; RESET="\e[0m"
 
-handle_error() {
-    local exit_code=$?
-    local line_number=$1
-    local command=$2
-    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
-    exit $exit_code
-}
+echo -e "${GREEN}Switching to PipeWire audio stack...${RESET}"
 
-trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
-RED='\e[31m'; GREEN='\e[32m'; YELLOW='\e[33m'; BOLD='\e[1m'; RESET='\e[0m'
-
-echo -e "${BOLD}${GREEN}▶ HyprRice Audio Repair${RESET}"
-
-## 1) Remove PulseAudio packages
 PA_PKGS=$(pacman -Qq | grep -E '^pulseaudio' || true)
 if [[ -n $PA_PKGS ]]; then
-  echo -e "${YELLOW}Removing PulseAudio packages:${RESET} $PA_PKGS"
-  sudo pacman -Rns --noconfirm $PA_PKGS
-else
-  echo -e "${GREEN}[OK] No PulseAudio packages detected.${RESET}"
+    echo -e "Removing PulseAudio: $PA_PKGS"
+    sudo pacman -Rns --noconfirm $PA_PKGS
 fi
 
-## 2) Ensure PipeWire stack present
 REQ=(pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils pulsemixer)
 missing=()
 for p in "${REQ[@]}"; do
-  pacman -Qi "$p" &>/dev/null || missing+=("$p")
-done
-if (( ${#missing[@]} )); then
-  echo -e "${YELLOW}Installing:${RESET} ${missing[*]}"
-  sudo pacman -S --noconfirm "${missing[@]}"
+    pacman -Qi "$p" >/dev/null 2>&1 || missing+=("$p")
+fi
+if ((${#missing[@]})); then
+    sudo pacman -S --needed --noconfirm "${missing[@]}"
 fi
 
-## 3) Enable + start services
 systemctl --user enable --now pipewire pipewire-pulse wireplumber
 
-## 4) Unmute Master/PCM on all cards
-for card in /proc/asound/card?; do
-  idx="${card##*card}"
-  amixer -c "$idx" -q sset Master unmute 100% || true
-  amixer -c "$idx" -q sset PCM    unmute 100% || true
-done
-
-## 5) Quick verification
 sleep 2
 if systemctl --user --quiet is-active pipewire && \
    systemctl --user --quiet is-active wireplumber; then
-   echo -e "${GREEN}✔ Audio services running.${RESET}"
+    echo -e "${GREEN}Audio services running${RESET}"
 else
-   echo -e "${RED}✖ PipeWire services NOT active! Check journalctl --user -u pipewire.${RESET}"
+    echo -e "${RED}Audio services NOT running${RESET}"
+    exit 1
 fi
 
-echo -e "${BOLD}${YELLOW}→ REBOOT NOW to complete audio repair.${RESET}"
+for card in /proc/asound/card?; do
+    idx="${card##*card}"
+    amixer -c "$idx" -q sset Master unmute 100% || true
+    amixer -c "$idx" -q sset PCM unmute 100% || true
+done
+
+echo -e "${GREEN}Audio fix applied.${RESET}"

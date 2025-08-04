@@ -1,0 +1,17 @@
+* {
+  font-family: monospace;
+  font-size: 14px;
+  background-color: rgba(0,0,0,0.9);
+  color: #00ff00;
+}
+button {
+  background-color: #000000;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 6px;
+}
+button:hover {
+  background-color: #003300;
+}
