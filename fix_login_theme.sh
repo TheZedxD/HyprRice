@@ -37,9 +37,13 @@ user = "greeter"
 EOC
 
 if command -v systemctl >/dev/null 2>&1; then
+    DM_SERVICES=(gdm.service sddm.service lightdm.service lxdm.service ly.service)
+    for svc in "${DM_SERVICES[@]}"; do
+        systemctl disable --now "$svc" >/dev/null 2>&1 || true
+    done
     systemctl enable --now greetd.service || true
 else
-    echo -e "${YELLOW}systemctl not found; cannot enable greetd.${RESET}"
+    echo -e "${YELLOW}systemctl not found; cannot manage display managers.${RESET}"
 fi
 
 echo -e "${GREEN}Login screen theme applied. Reboot to see changes.${RESET}"

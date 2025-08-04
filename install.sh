@@ -134,7 +134,11 @@ if command -v systemctl >/dev/null 2>&1; then
     sudo systemctl enable --now bluetooth.service || true
     sudo systemctl enable --now power-profiles-daemon.service || true
     sudo -u "$TARGET_USER" systemctl --user restart xdg-desktop-portal-hyprland.service || true
-    sudo systemctl enable greetd.service || true
+    DM_SERVICES=(gdm.service sddm.service lightdm.service lxdm.service ly.service)
+    for svc in "${DM_SERVICES[@]}"; do
+        sudo systemctl disable --now "$svc" >/dev/null 2>&1 || true
+    done
+    sudo systemctl enable --now greetd.service || true
 fi
 
 if command -v sudo >/dev/null 2>&1; then
