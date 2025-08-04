@@ -1,59 +1,29 @@
 #!/usr/bin/env bash
-# Script to fix greetd login screen theme
-set -Eeuo pipefail
+# fix_login_theme.sh: apply neon green greetd/tuigreet theme
+set -euo pipefail
 
-handle_error() {
-    local exit_code=$?
-    local line_number=$1
-    local command=$2
-    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
-    exit $exit_code
-}
+GREEN="\e[32m"; RED="\e[31m"; YELLOW="\e[33m"; RESET="\e[0m"
 
-trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
-
-RED='\e[31m'; GREEN='\e[32m'; YELLOW='\e[33m'; RESET='\e[0m'
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CFG_SRC="$SCRIPT_DIR/greetd/config.toml"
+CFG_DST="/etc/greetd/config.toml"
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${RED}This script must be run as root.${RESET}"
+    echo -e "${RED}Run as root to modify greetd config.${RESET}"
     exit 1
 fi
 
-PKGS=(greetd greetd-tuigreet)
-if command -v pacman >/dev/null 2>&1; then
-    missing=()
-    for pkg in "${PKGS[@]}"; do
-        pacman -Qi "$pkg" >/dev/null 2>&1 || missing+=("$pkg")
-    done
-    if ((${#missing[@]})); then
-        echo -e "Installing missing packages: ${missing[*]}"
-        pacman -S --needed --noconfirm "${missing[@]}" || true
-    fi
-else
-    echo -e "${YELLOW}pacman not found; skipping package installation.${RESET}"
-fi
+install -Dm644 "$CFG_SRC" "$CFG_DST"
 
-CFG_DIR=/etc/greetd
-CFG_FILE=$CFG_DIR/config.toml
-mkdir -p "$CFG_DIR"
-
-cat > "$CFG_FILE" <<'EOC'
-[terminal]
-vt = 1
-
-[default_session]
-command = "tuigreet --time --user-menu --cmd Hyprland --theme 'text=green;prompt=green;input=green;container=black;border=green;title=green;action=green;button=green'"
-user = "greeter"
-EOC
+echo -e "${GREEN}Greetd configuration installed at $CFG_DST${RESET}"
 
 if command -v systemctl >/dev/null 2>&1; then
     DM_SERVICES=(gdm.service sddm.service lightdm.service lxdm.service ly.service)
     for svc in "${DM_SERVICES[@]}"; do
         systemctl disable --now "$svc" >/dev/null 2>&1 || true
     done
-    systemctl enable --now greetd.service || true
+    systemctl enable --now greetd.service
+    echo -e "${GREEN}greetd enabled${RESET}"
 else
-    echo -e "${YELLOW}systemctl not found; cannot manage display managers.${RESET}"
+    echo -e "${YELLOW}systemctl not found; enable greetd manually.${RESET}"
 fi
-
-echo -e "${GREEN}Login screen theme applied. Reboot to see changes.${RESET}"

@@ -1,58 +1,34 @@
 #!/usr/bin/env bash
-# setup.sh: Orchestrate full HyprRice installation with logging
-set -Eeuo pipefail
+# setup.sh: umbrella script to install HyprRice environment
+set -euo pipefail
 
-handle_error() {
-    local exit_code=$?
-    local line_number=$1
-    local command=$2
-    echo "ERROR: Command failed with exit code $exit_code at line $line_number: $command" >&2
-    exit $exit_code
-}
-
-trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
+GREEN="\e[32m"; RED="\e[31m"; RESET="\e[0m"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-LOG_FILE="$SCRIPT_DIR/setup.log"
+LOG_DIR="$HOME/HyprRice"
+LOG_FILE="$LOG_DIR/setup.log"
+mkdir -p "$LOG_DIR"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
-echo "Starting HyprRice setup..."
-
 run_step() {
-    local desc="$1"; local script="$2"
-    if [[ -x "$SCRIPT_DIR/$script" ]]; then
-        echo -e "\n==> $desc"
-        "$SCRIPT_DIR/$script"
+    local desc="$1" script="$2"
+    echo -ne "==> $desc... "
+    set +e
+    "$SCRIPT_DIR/$script"
+    local status=$?
+    set -e
+    if [ $status -eq 0 ]; then
+        echo -e "${GREEN}OK${RESET}"
     else
-        echo -e "\nSkipping $desc (missing $script)"
+        echo -e "${RED}ERROR${RESET}"
+        exit $status
     fi
 }
 
-# Ensure python command is available and venv module works
-if ! command -v python >/dev/null 2>&1 && command -v python3 >/dev/null 2>&1; then
-    echo "Creating python symlink to python3..."
-    sudo ln -sf "$(command -v python3)" /usr/bin/python
-fi
+run_step "Install packages" install.sh
+run_step "Apply login theme" fix_login_theme.sh
+run_step "Configure audio" fix_sound.sh
+run_step "Install TV app" install_tv.sh
+run_step "Run validation" validate.sh
 
-if command -v python >/dev/null 2>&1; then
-    if python -m venv "$SCRIPT_DIR/.venv-test" >/dev/null 2>&1; then
-        rm -rf "$SCRIPT_DIR/.venv-test"
-    elif command -v pacman >/dev/null 2>&1; then
-        echo "Installing python-virtualenv for venv support..."
-        sudo pacman -S --needed --noconfirm python-virtualenv || true
-    fi
-fi
-
-run_step "Install base configuration" install.sh
-run_step "Apply login screen theme" fix_login_theme.sh
-run_step "Apply sound fix" fix_sound.sh
-run_step "Update configuration" update.sh
-run_step "Run system check" system_check.sh
-run_step "Install optional TV application" install_tv.sh
-
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
-    echo "Added ~/.local/bin to PATH in ~/.bashrc"
-fi
-
-echo -e "\nHyprRice setup complete. Logs saved to $LOG_FILE"
+echo -e "\nSetup complete. Log saved to $LOG_FILE"
