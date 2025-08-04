@@ -19,13 +19,17 @@ check() {
 check "hyprctl" command -v hyprctl
 
 if command -v systemctl >/dev/null 2>&1; then
-    if systemctl --failed --no-legend | grep . >/dev/null 2>&1; then
-        echo -e "Failed systemd units present: ${RED}ERROR${RESET}"
-        errors=$((errors+1))
+    if systemctl is-system-running >/dev/null 2>&1; then
+        if systemctl --failed --no-legend | grep . >/dev/null 2>&1; then
+            echo -e "Failed systemd units present: ${RED}ERROR${RESET}"
+            errors=$((errors+1))
+        else
+            echo -e "systemctl --failed: ${GREEN}OK${RESET}"
+        fi
+        check "greetd active" systemctl is-active greetd.service
     else
-        echo -e "systemctl --failed: ${GREEN}OK${RESET}"
+        echo -e "systemd not running: ${YELLOW}skipping system checks${RESET}"
     fi
-    check "greetd active" systemctl is-active greetd.service
 else
     echo -e "systemctl: ${YELLOW}not found${RESET}"
 fi
