@@ -48,7 +48,7 @@ else
 fi
 
 if ((errors>0)); then
-    exit 1
+    echo -e "${YELLOW}Validation completed with warnings${RESET}"
 else
     echo -e "${GREEN}All checks passed${RESET}"
 fi

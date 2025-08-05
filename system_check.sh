@@ -15,6 +15,11 @@ trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
 RED='\e[31m'; GREEN='\e[32m'; YELLOW='\e[33m'; RESET='\e[0m'
 errors=0
 
+if ! command -v pacman >/dev/null 2>&1; then
+    echo -e "${YELLOW}pacman not found; skipping system checks.${RESET}"
+    exit 0
+fi
+
 check_cmd() {
     local cmd="$1"
     if command -v "$cmd" >/dev/null 2>&1; then

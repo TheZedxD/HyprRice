@@ -5,8 +5,8 @@ set -euo pipefail
 GREEN="\e[32m"; RED="\e[31m"; YELLOW="\e[33m"; RESET="\e[0m"
 
 if ! command -v pacman >/dev/null 2>&1; then
-    echo -e "${RED}pacman not found. Aborting.${RESET}"
-    exit 1
+    echo -e "${YELLOW}pacman not found; skipping package installation.${RESET}"
+    exit 0
 fi
 
 PACMAN_PKGS=(
