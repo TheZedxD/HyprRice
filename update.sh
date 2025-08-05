@@ -182,8 +182,11 @@ progress $step $total
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo -e "\nFetching latest changes..."
     current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)
-    git fetch origin "$current_branch"
-    git reset --hard "origin/$current_branch"
+    if git fetch origin "$current_branch"; then
+        git reset --hard "origin/$current_branch" || true
+    else
+        echo "Git fetch failed; skipping update."
+    fi
 else
     echo -e "\nNot a git repository; skipping update."
 fi

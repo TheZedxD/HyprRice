@@ -19,4 +19,5 @@ if [ -z "$APP_SCRIPT" ]; then
     exit 1
 fi
 
+cd "$TV_DIR"
 exec "$VENV_DIR/bin/python" "$APP_SCRIPT" "$@"

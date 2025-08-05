@@ -21,8 +21,12 @@ if command -v systemctl >/dev/null 2>&1; then
     for svc in "${DM_SERVICES[@]}"; do
         systemctl disable --now "$svc" >/dev/null 2>&1 || true
     done
-    systemctl enable --now greetd.service
-    echo -e "${GREEN}greetd enabled${RESET}"
+    if systemctl list-unit-files | grep -q '^greetd.service'; then
+        systemctl enable --now greetd.service || true
+        echo -e "${GREEN}greetd enabled${RESET}"
+    else
+        echo -e "${YELLOW}greetd service not found; skipping enable.${RESET}"
+    fi
 else
     echo -e "${YELLOW}systemctl not found; enable greetd manually.${RESET}"
 fi
