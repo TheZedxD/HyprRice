@@ -6,6 +6,11 @@ GREEN="\e[32m"; RED="\e[31m"; YELLOW="\e[33m"; RESET="\e[0m"
 
 echo -e "${GREEN}Switching to PipeWire audio stack...${RESET}"
 
+if ! command -v pacman >/dev/null 2>&1; then
+    echo -e "${RED}pacman not found. Aborting.${RESET}"
+    exit 1
+fi
+
 PA_PKGS=$(pacman -Qq | grep -E '^pulseaudio' || true)
 if [[ -n $PA_PKGS ]]; then
     echo -e "Removing PulseAudio: $PA_PKGS"
