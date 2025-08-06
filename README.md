@@ -114,9 +114,12 @@ appropriate packages or start the required daemons.
 ## TV Streaming Application Integration
 
 `setup.sh` can install a Python/Qt-based TV streaming application from the
-[`codexTest`](https://github.com/TheZedxD/codexTest) repository. After running
-the setup script, launch the app from your application menu or by running
-`python3 ~/codexTest/app.py`.
+[`codexTest`](https://github.com/TheZedxD/codexTest) repository. On Linux the
+application can also be installed separately by running `./install_tv.sh`; on
+Windows use `install_tv.ps1`. Both scripts clone the repository, create a
+virtual environment and place a launcher in your desktop menu. After
+installation launch the app from your application menu or via the `TVPlayer`
+shortcut created on your Desktop.
 
 ## About
 
