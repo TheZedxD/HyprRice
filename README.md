@@ -121,6 +121,8 @@ virtual environment and place a launcher in your desktop menu. After
 installation launch the app from your application menu or via the `TVPlayer`
 shortcut created on your Desktop.
 
+If `~/PythonArcade/arcade` is present, HyprRice automatically adds a Python Arcade launcher to Wofi.
+
 ## About
 
 HyprRice is a matrix-inspired configuration for the [Hyprland](https://github.com/hyprwm/Hyprland) Wayland compositor. It aims for a clean and minimal look with sharp edges and bright green accents.
