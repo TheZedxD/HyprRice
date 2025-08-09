@@ -14,7 +14,7 @@ PACMAN_PKGS=(
     hyprland greetd pipewire pipewire-pulse pipewire-alsa wireplumber
     alsa-utils pulsemixer grim slurp swaybg swaylock swayidle
     networkmanager network-manager-applet bluez bluez-utils blueman
-    brightnessctl jq ffmpeg gstreamer gst-plugins-good gst-libav
+    brightnessctl jq ffmpeg gstreamer gst-plugins-good gst-libav desktop-file-utils
     xdg-desktop-portal xdg-desktop-portal-hyprland
     ttf-jetbrains-mono-nerd ttf-font-awesome polkit-gnome
     power-profiles-daemon
@@ -52,5 +52,8 @@ for dir in hypr waybar wofi wlogout; do
     chown -R "$TARGET_USER":"$TARGET_USER" "$CONFIG_DEST/$dir"
 
 done
+
+SCRIPT_ROOT="$(cd "$(dirname "$0")" && pwd)"
+sudo -u "$TARGET_USER" bash -c "source '$SCRIPT_ROOT/scripts/install_python_arcade_desktop.sh' && install_python_arcade_desktop"
 
 echo -e "${GREEN}Package installation and config deployment complete.${RESET}"

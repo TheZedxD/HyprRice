@@ -210,6 +210,9 @@ for dir in "${DIRS[@]}"; do
     progress $step $total
 done
 
+# Install Python Arcade desktop entry if available
+sudo -u "$TARGET_USER" bash -c "source '$SCRIPT_DIR/scripts/install_python_arcade_desktop.sh' && install_python_arcade_desktop"
+
 # Validate configuration
 if [[ -x "$SCRIPT_DIR/validate.sh" ]]; then
     sudo -u "$TARGET_USER" "$SCRIPT_DIR/validate.sh" || echo "Validation reported issues."
