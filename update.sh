@@ -216,10 +216,11 @@ for dir in "${DIRS[@]}"; do
     if command -v rsync >/dev/null 2>&1; then
         rsync -a --delete "$src" "$dest"
     else
-        rm -rf "$CONFIG_DEST/$dir"
-        cp -r "$src" "$CONFIG_DEST/"
+        rm -rf "$dest"
+        mkdir -p "$dest"
+        cp -r "$src" "$dest"
     fi
-    chown -R "$TARGET_USER":"$TARGET_USER" "$CONFIG_DEST/$dir" || true
+    chown -R "$TARGET_USER":"$TARGET_USER" "$dest" || true
     step=$((step+1))
     progress $step $total
 done

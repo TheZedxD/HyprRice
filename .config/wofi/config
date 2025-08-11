@@ -1,6 +1,10 @@
-width=400
-height=300
+show=drun
 term=alacritty
 allow_images=false
-border=false
-hover_delay=100
+matching=fuzzy
+prompt=Search…
+width=900
+height=520
+location=center
+hide_scroll=true
+layer=overlay
