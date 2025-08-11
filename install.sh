@@ -56,4 +56,21 @@ done
 SCRIPT_ROOT="$(cd "$(dirname "$0")" && pwd)"
 sudo -u "$TARGET_USER" bash -c "source '$SCRIPT_ROOT/scripts/install_python_arcade_desktop.sh' && install_python_arcade_desktop"
 
+APP_DIR="$TARGET_HOME/.local/share/applications"
+UPDATE_DESKTOP="$APP_DIR/hyprrice-update.desktop"
+mkdir -p "$APP_DIR"
+cat > "$UPDATE_DESKTOP" <<EOF
+[Desktop Entry]
+Name=HyprRice Update
+Exec=$SCRIPT_ROOT/.update
+Terminal=true
+Type=Application
+Icon=system-software-update
+Categories=System;
+EOF
+chown "$TARGET_USER":"$TARGET_USER" "$UPDATE_DESKTOP" || true
+if command -v update-desktop-database >/dev/null 2>&1; then
+    sudo -u "$TARGET_USER" update-desktop-database "$APP_DIR" || true
+fi
+
 echo -e "${GREEN}Package installation and config deployment complete.${RESET}"

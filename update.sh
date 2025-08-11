@@ -20,6 +20,20 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 DIRS=(alacritty hypr waybar wofi wlogout)
 
+APP_DIR="$TARGET_HOME/.local/share/applications"
+UPDATE_DESKTOP="$APP_DIR/hyprrice-update.desktop"
+mkdir -p "$APP_DIR"
+cat > "$UPDATE_DESKTOP" <<EOF
+[Desktop Entry]
+Name=HyprRice Update
+Exec=$SCRIPT_DIR/.update
+Terminal=true
+Type=Application
+Icon=system-software-update
+Categories=System;
+EOF
+chown "$TARGET_USER":"$TARGET_USER" "$UPDATE_DESKTOP" || true
+
 # Capture Hyprland instance signature so hyprctl can talk to the running compositor
 HYPR_SIG=$(sudo -u "$TARGET_USER" printenv HYPRLAND_INSTANCE_SIGNATURE 2>/dev/null || true)
 
@@ -138,7 +152,7 @@ if command -v kbuildsycoca6 >/dev/null 2>&1; then
     sudo -u "$TARGET_USER" XDG_MENU_PREFIX=arch- kbuildsycoca6 || true
 fi
 if command -v update-desktop-database >/dev/null 2>&1; then
-    sudo -u "$TARGET_USER" update-desktop-database || true
+    sudo -u "$TARGET_USER" update-desktop-database "$APP_DIR" || true
 fi
 if command -v systemctl >/dev/null 2>&1; then
     sudo systemctl enable --now NetworkManager.service || true
