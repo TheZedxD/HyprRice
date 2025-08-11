@@ -224,6 +224,17 @@ for dir in "${DIRS[@]}"; do
     progress $step $total
 done
 
+# Install helper and shortcut scripts
+sudo install -m 755 "$SCRIPT_DIR/scripts/hyprrice-help.sh" /usr/local/bin/hyprrice-help.sh
+
+mkdir -p "$TARGET_HOME/.config/hypr/scripts"
+sudo install -m 755 "$SCRIPT_DIR/scripts/show_shortcuts.sh" "$TARGET_HOME/.config/hypr/scripts/show_shortcuts.sh"
+chown "$TARGET_USER":"$TARGET_USER" "$TARGET_HOME/.config/hypr/scripts/show_shortcuts.sh" || true
+
+sudo install -m 644 "$SCRIPT_DIR/scripts/hyprrice-shortcuts.desktop" "$APP_DIR/hyprrice-shortcuts.desktop"
+chown "$TARGET_USER":"$TARGET_USER" "$APP_DIR/hyprrice-shortcuts.desktop" || true
+sudo -u "$TARGET_USER" update-desktop-database "$APP_DIR" || true
+
 # Install Python Arcade desktop entry if available
 sudo -u "$TARGET_USER" bash -c "source '$SCRIPT_DIR/scripts/install_python_arcade_desktop.sh' && install_python_arcade_desktop"
 
@@ -246,6 +257,10 @@ if command -v hyprctl >/dev/null 2>&1; then
     fi
     # reload waybar to pick up new configuration
     sudo -u "$TARGET_USER" pkill -SIGUSR2 waybar 2>/dev/null || true
+fi
+
+if [[ -x "$SCRIPT_DIR/system_check.sh" ]]; then
+    "$SCRIPT_DIR/system_check.sh" || true
 fi
 
 echo -e "\nHyprRice update complete."
