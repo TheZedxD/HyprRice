@@ -24,12 +24,14 @@ window#waybar .module:hover {
   padding: 0 6px;
   margin: 0 2px;
   background: transparent;
+  border: 2px solid transparent;
   border-radius: 4px;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, border 0.3s ease;
 }
 
 #hyprland-workspaces button.active {
-  background: #005500;
+  border: 2px solid #33ff33;
+  background: transparent;
 }
 
 #hyprland-workspaces button:hover {

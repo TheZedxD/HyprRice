@@ -18,7 +18,7 @@ TARGET_HOME=$(eval echo "~$TARGET_USER")
 CONFIG_DEST="$TARGET_HOME/.config"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
-DIRS=(alacritty hypr waybar wofi)
+DIRS=(alacritty hypr waybar wofi wlogout)
 
 # Capture Hyprland instance signature so hyprctl can talk to the running compositor
 HYPR_SIG=$(sudo -u "$TARGET_USER" printenv HYPRLAND_INSTANCE_SIGNATURE 2>/dev/null || true)
@@ -213,6 +213,11 @@ done
 # Install Python Arcade desktop entry if available
 sudo -u "$TARGET_USER" bash -c "source '$SCRIPT_DIR/scripts/install_python_arcade_desktop.sh' && install_python_arcade_desktop"
 
+# Install or update the optional TV streaming application
+if [[ -x "$SCRIPT_DIR/install_tv.sh" ]]; then
+    "$SCRIPT_DIR/install_tv.sh" || true
+fi
+
 # Validate configuration
 if [[ -x "$SCRIPT_DIR/validate.sh" ]]; then
     sudo -u "$TARGET_USER" "$SCRIPT_DIR/validate.sh" || echo "Validation reported issues."
@@ -225,6 +230,8 @@ if command -v hyprctl >/dev/null 2>&1; then
     else
         sudo -u "$TARGET_USER" hyprctl reload || true
     fi
+    # reload waybar to pick up new configuration
+    sudo -u "$TARGET_USER" pkill -SIGUSR2 waybar 2>/dev/null || true
 fi
 
 echo -e "\nHyprRice update complete."
