@@ -86,10 +86,10 @@
     "format": "{id}",
     "active-only": false,
     "persistent-workspaces": {
-      "*": 5
+      "*": 9
     },
-    "on-scroll-up": "hyprctl dispatch workspace e-1",
-    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
     "on-click": "activate",
     "tooltip": true,
     "tooltip-format": "Workspace {id}: {windows} windows"

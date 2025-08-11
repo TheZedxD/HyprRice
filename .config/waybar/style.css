@@ -20,26 +20,23 @@ window#waybar .module:hover {
   color: #ffffff;
 }
 
-#hyprland-workspaces button {
-  padding: 0 6px;
+#workspaces button {
+  padding: 2px 6px;
   margin: 0 2px;
-  background: transparent;
   border: 2px solid transparent;
   border-radius: 4px;
-  transition: background 0.3s ease, border 0.3s ease;
+  background: #000;
+  color: #00ff00;
 }
 
-#hyprland-workspaces button.active {
-  border: 2px solid #33ff33;
-  background: transparent;
+#workspaces button.active {
+  border-color: #33ff33;
+  background: #0b110b;
+  color: #b8ffb8;
 }
 
-#hyprland-workspaces button:hover {
-  background: #003300;
-}
-
-#hyprland-workspaces {
-  margin-left: 6px;
+#workspaces button:hover {
+  border-color: #444;
 }
 
 #pulseaudio.muted {
