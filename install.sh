@@ -46,11 +46,13 @@ CONFIG_SRC="$(cd "$(dirname "$0")" && pwd)/.config"
 CONFIG_DEST="$TARGET_HOME/.config"
 mkdir -p "$CONFIG_DEST"
 for dir in hypr waybar wofi wlogout; do
-    rm -rf "$CONFIG_DEST/$dir"
-    cp -r "$CONFIG_SRC/$dir" "$CONFIG_DEST/"
+    src="$CONFIG_SRC/$dir"
+    dest="$CONFIG_DEST/$dir"
+    rm -rf "$dest"
+    mkdir -p "$dest"
+    cp -r "$src/." "$dest/"
     echo -e "${GREEN}Installed $dir config${RESET}"
-    chown -R "$TARGET_USER":"$TARGET_USER" "$CONFIG_DEST/$dir"
-
+    chown -R "$TARGET_USER":"$TARGET_USER" "$dest"
 done
 
 SCRIPT_ROOT="$(cd "$(dirname "$0")" && pwd)"

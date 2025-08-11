@@ -1,4 +1,12 @@
-window {
-  background-color: #000000;
-  color: #00ff00;
+window { background-color: #000000; border: 2px solid #00ff00; }
+#input, #prompt {
+  color: #00ff00; background-color: #0a0a0a; border: 1px solid #00ff00;
 }
+#input:focus { border-color: #33ff33; }
+#entry, #text { color: #b8ffb8; }
+#entry:selected, #entry:selected #text {
+  background-color: #071907; color: #00ff00;
+}
+#img { margin-right: 6px; }
+listview { background-color: #000000; }
+scrollbar { background-color: #0a0a0a; }
