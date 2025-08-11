@@ -45,22 +45,26 @@ fi
 deactivate
 
 chmod +x "$REPO_DIR/run_tv.sh"
+sudo cp "$REPO_DIR/run_tv.sh" /usr/local/bin/run_tv.sh
 
 TARGET_USER=${SUDO_USER:-$USER}
 TARGET_HOME=$(eval echo "~$TARGET_USER")
-DESKTOP_FILE="$TARGET_HOME/.local/share/applications/tv.desktop"
-mkdir -p "$(dirname "$DESKTOP_FILE")"
-{
-    echo "[Desktop Entry]"
-    echo "Type=Application"
-    echo "Name=TV"
-    echo "Exec=$REPO_DIR/run_tv.sh"
-    echo "Terminal=false"
-    echo "Categories=Video;"
-    if [ -f "$TV_DIR/logo.png" ]; then
-        echo "Icon=$TV_DIR/logo.png"
-    fi
-} > "$DESKTOP_FILE"
+APP_DIR="$TARGET_HOME/.local/share/applications"
+DESKTOP_FILE="$APP_DIR/tv.desktop"
+mkdir -p "$APP_DIR"
+cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Name=TV
+Comment=TV Player
+Exec=/usr/local/bin/run_tv.sh
+Terminal=false
+Type=Application
+Icon=applications-multimedia
+Categories=AudioVideo;
+EOF
 chown "$TARGET_USER":"$TARGET_USER" "$DESKTOP_FILE"
+if command -v update-desktop-database >/dev/null 2>&1; then
+    sudo -u "$TARGET_USER" update-desktop-database "$APP_DIR" || true
+fi
 
 echo -e "${GREEN}TV application environment ready in $VENV_DIR${RESET}"
