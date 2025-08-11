@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=HyprRice Shortcuts
+Comment=View all Super shortcuts
+Exec=/bin/sh -lc "$HOME/.config/hypr/scripts/show_shortcuts.sh"
+Terminal=false
+Type=Application
+Icon=preferences-desktop-keyboard
+Categories=System;Utility;
