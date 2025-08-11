@@ -143,7 +143,7 @@ For forward-looking improvements and advanced setup techniques, see the [Enhance
 ## Features / Updates
 
 - Workspace indicator and clock sit on the left; hovering the clock shows a monthly calendar with the current date underlined.
-- Cycle through workspaces with <kbd>Super</kbd>+<kbd>Tab</kbd> and <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>; the Waybar workspace module reflects the active desktop.
+- Cycle through windows with <kbd>Super</kbd>+<kbd>Tab</kbd> and <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>; move between workspaces with <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>Arrow</kbd>; the Waybar workspace module reflects the active desktop.
 - System status icons (CPU, memory, network, volume, battery) now use consistent spacing and a working memory glyph.
 
 ## Keybindings
@@ -166,9 +166,9 @@ For forward-looking improvements and advanced setup techniques, see the [Enhance
 | **Super + Ctrl + Arrow Keys** | Send window to adjacent workspace |
 | **Super + [1-9]** | Switch to workspace 1-9 |
 | **Super + Shift + [1-9]** | Move window to workspace 1-9 |
-| **Super + Tab** | Switch to next workspace |
-| **Super + Shift + Tab** | Switch to previous workspace |
-| **Alt + Tab** | Cycle through windows |
+| **Super + Alt + Arrow Keys** | Switch to previous/next workspace |
+| **Super + Tab** | Cycle through windows |
+| **Super + Shift + Tab** | Cycle through windows backwards |
 | **Print** | Screenshot full screen |
 | **Super + S** | Screenshot region |
 
