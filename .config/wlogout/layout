@@ -1,5 +1,7 @@
-logout,hyprctl dispatch exit,,Logout
-reboot,systemctl reboot,,Reboot
-shutdown,systemctl poweroff,,Shutdown
-lock,swaylock,,Lock
-suspend,systemctl suspend,,Suspend
+[
+  { "label": "logout",   "action": "hyprctl dispatch exit", "text": " Logout",   "keybind": "l" },
+  { "label": "reboot",   "action": "systemctl reboot",      "text": " Reboot",   "keybind": "r" },
+  { "label": "shutdown", "action": "systemctl poweroff",    "text": " Shutdown", "keybind": "s" },
+  { "label": "lock",     "action": "swaylock",              "text": " Lock",     "keybind": "k" },
+  { "label": "suspend",  "action": "systemctl suspend",     "text": " Suspend",  "keybind": "u" }
+]
