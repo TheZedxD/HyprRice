@@ -22,7 +22,7 @@
     "tray"
   ],
   "clock": {
-    "format": "{:%A %d %B %I:%M %p}",
+    "format": "{:%A %d %B} <b><big>{:%I:%M %p}</big></b>",
     "tooltip": true,
     "tooltip-format": "<tt><big>{calendar}</big></tt>",
     "on-click": "alacritty -e cal",
@@ -83,7 +83,7 @@
     "on-click": "xfce4-power-manager-settings"
   },
   "hyprland/workspaces": {
-    "format": "{id}",
+    "format": "{id}{icon}",
     "active-only": false,
     "persistent-workspaces": {
       "*": 9
@@ -92,6 +92,11 @@
     "on-scroll-down": "hyprctl dispatch workspace e-1",
     "on-click": "activate",
     "tooltip": true,
-    "tooltip-format": "Workspace {id}: {windows} windows"
+    "tooltip-format": "Workspace {id}: {windows} windows",
+    "format-icons": {
+      "empty": "▢",
+      "persistent": "▣",
+      "active": "▣"
+    }
   }
 }
