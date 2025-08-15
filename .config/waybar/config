@@ -21,9 +21,9 @@
     "battery",
     "tray"
   ],
-  "clock": {
-    "format": "{:%A %d %B} <b><big>{:%I:%M %p}</big></b>",
-    "tooltip": true,
+    "clock": {
+      "format": " {:%A %d %B} <b><big>{:%I:%M %p}</big></b>",
+      "tooltip": true,
     "tooltip-format": "<tt><big>{calendar}</big></tt>",
     "on-click": "alacritty -e cal",
     "calendar": {

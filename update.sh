@@ -57,6 +57,7 @@ EOF2
     network-manager-applet
     nm-connection-editor
     nwg-look
+    rsync
     pipewire
     pipewire-pulse
     pipewire-alsa
@@ -183,12 +184,10 @@ EOF3
   progress $step $total
 
   if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    echo -e "\nFetching latest changes..."
+    echo -e "\nUpdating repository..."
     current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)
-    if git fetch origin "$current_branch"; then
-      git reset --hard "origin/$current_branch" || true
-    else
-      echo "Git fetch failed; skipping update."
+    if ! git pull --ff-only origin "$current_branch"; then
+      echo "Git pull failed; skipping repository update."
     fi
   else
     echo -e "\nNot a git repository; skipping update."
@@ -203,11 +202,9 @@ EOF3
     dest="$CONFIG_DEST/$dir/"
     mkdir -p "$dest"
     if command -v rsync >/dev/null 2>&1; then
-      rsync -a --delete "$src" "$dest"
+      rsync -a --ignore-existing "$src" "$dest"
     else
-      rm -rf "$dest"
-      mkdir -p "$dest"
-      cp -r "$src" "$dest"
+      find "$src" -mindepth 1 -maxdepth 1 -exec cp -r -n {} "$dest" \;
     fi
     chown -R "$TARGET_USER":"$TARGET_USER" "$dest" || true
     step=$((step+1))
