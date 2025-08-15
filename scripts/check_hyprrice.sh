@@ -9,7 +9,8 @@ command -v wofi >/dev/null || warn "wofi missing"
 command -v wlogout >/dev/null || warn "wlogout missing"
 
 grep -q '"hyprland/workspaces"' ~/.config/waybar/config* || warn "Waybar workspaces module not found"
-grep -q 'active-only": *false' ~/.config/waybar/config* || ok "Workspaces show multiple (active-only=false)"
+grep -q 'active-only": *true' ~/.config/waybar/config* || warn "Workspaces not active-only"
+grep -q 'persistent-workspaces' ~/.config/waybar/config* && warn "Persistent workspaces configured"
 grep -q 'on-click": *"activate"' ~/.config/waybar/config* || ok "Click action set (activate or hyprctl)"
 
 [ -f ~/.config/waybar/style.css ] && grep -q '#workspaces button.active' ~/.config/waybar/style.css && ok "Active workspace styled"

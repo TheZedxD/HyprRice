@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "spacing": 5,
+  "spacing": 3,
   "tray": {
     "icon-size": 16,
     "spacing": 10
@@ -41,53 +41,50 @@
     "on-click": "wlogout"
   },
   "pulseaudio": {
-    "format": "   VOL {volume}%",
-    "format-muted": "   VOL {volume}%",
+    "format": " {volume}%",
+    "format-muted": " {volume}%",
     "tooltip": true,
     "tooltip-format": "Volume: {volume}%",
     "on-click": "alacritty -e pulsemixer"
   },
   "network": {
-    "format-wifi": "   NET {signalStrength}%",
-    "format-ethernet": "   NET {ipaddr}",
-    "format-disconnected": "   NET down",
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": " {ipaddr}",
+    "format-disconnected": " down",
     "tooltip": true,
     "tooltip-format": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
     "on-click": "nm-connection-editor"
   },
   "cpu": {
-    "format": "   CPU {usage}%",
+    "format": " {usage}%",
     "tooltip": true,
     "tooltip-format": "CPU usage: {usage}%",
     "on-click": "alacritty -e htop"
   },
   "memory": {
-    "format": "󰍛   MEM {used}G/{total}G",
+    "format": "󰍛 {used}G",
     "tooltip": true,
     "tooltip-format": "Memory used: {used}G / {total}G",
     "on-click": "alacritty -e htop"
   },
   "disk": {
-    "format": " {free}/{total}",
+    "format": " {free}",
     "path": "/",
     "tooltip": true,
     "tooltip-format": "{used} used / {total}",
     "on-click": "alacritty -e ncdu /"
   },
   "battery": {
-    "format": "   BAT {capacity}%",
-    "format-charging": "   BAT {capacity}%",
-    "format-full": "   BAT full",
+    "format": " {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-full": " full",
     "tooltip": true,
     "tooltip-format": "Battery: {capacity}%",
     "on-click": "xfce4-power-manager-settings"
   },
   "hyprland/workspaces": {
     "format": "{id}{icon}",
-    "active-only": false,
-    "persistent-workspaces": {
-      "*": 9
-    },
+    "active-only": true,
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
     "on-click": "activate",
