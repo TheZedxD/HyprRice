@@ -20,6 +20,10 @@ window#waybar .module:hover {
   color: #ffffff;
 }
 
+window#waybar .icon {
+  padding-right: 4px;
+}
+
 #workspaces button {
   padding: 2px 6px;
   margin: 0 2px;

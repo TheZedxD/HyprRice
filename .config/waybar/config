@@ -8,10 +8,11 @@
   },
   "modules-left": [
     "custom/wlogout",
-    "hyprland/workspaces",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
     "clock"
   ],
-  "modules-center": [],
   "modules-right": [
     "pulseaudio",
     "network",
@@ -62,13 +63,13 @@
     "on-click": "alacritty -e htop"
   },
   "memory": {
-    "format": "󰍛 {used}G",
+    "format": "󰍛 {used}G/{total}G",
     "tooltip": true,
     "tooltip-format": "Memory used: {used}G / {total}G",
     "on-click": "alacritty -e htop"
   },
   "disk": {
-    "format": " {free}",
+    "format": " {used}/{total}",
     "path": "/",
     "tooltip": true,
     "tooltip-format": "{used} used / {total}",
