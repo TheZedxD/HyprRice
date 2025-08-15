@@ -1,7 +1,7 @@
 [
-  { "label": "logout",   "action": "hyprctl dispatch exit", "text": " Logout",   "keybind": "l" },
-  { "label": "reboot",   "action": "systemctl reboot",      "text": " Reboot",   "keybind": "r" },
-  { "label": "shutdown", "action": "systemctl poweroff",    "text": " Shutdown", "keybind": "s" },
-  { "label": "lock",     "action": "swaylock",              "text": " Lock",     "keybind": "k" },
-  { "label": "suspend",  "action": "systemctl suspend",     "text": " Suspend",  "keybind": "u" }
+  { "label": "logout",   "action": "hyprctl dispatch exit", "text": "\uf011 Logout",   "keybind": "l" },
+  { "label": "reboot",   "action": "systemctl reboot",      "text": "\uf01e Reboot",   "keybind": "r" },
+  { "label": "shutdown", "action": "systemctl poweroff",    "text": "\uf085 Shutdown", "keybind": "s" },
+  { "label": "lock",     "action": "swaylock",              "text": "\uf023 Lock",     "keybind": "k" },
+  { "label": "suspend",  "action": "systemctl suspend",     "text": "\uf04c Suspend",  "keybind": "u" }
 ]
